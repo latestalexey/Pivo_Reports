@@ -1,0 +1,960 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SchemaFile xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema">
+		<dataSource>
+			<name>ИсточникДанных1</name>
+			<dataSourceType>Local</dataSourceType>
+		</dataSource>
+		<dataSet xsi:type="DataSetQuery">
+			<name>НаборДанных1</name>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ВидБюджета</dataPath>
+				<field>ВидБюджета</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Подразделение</dataPath>
+				<field>Подразделение</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Проект</dataPath>
+				<field>Проект</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СтатьяБюджета</dataPath>
+				<field>СтатьяБюджета</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СценарийБюджета</dataPath>
+				<field>СценарийБюджета</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Период</dataPath>
+				<field>Период</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СуммаПлан</dataPath>
+				<field>СуммаПлан</field>
+				<valueType>
+					<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:decimal</Type>
+					<NumberQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+						<Digits>0</Digits>
+						<FractionDigits>0</FractionDigits>
+						<AllowedSign>Any</AllowedSign>
+					</NumberQualifiers>
+				</valueType>
+				<appearance>
+					<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+						<parameter>Формат</parameter>
+						<value xsi:type="xs:string">ЧДЦ=2; ЧН=</value>
+					</item>
+				</appearance>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СуммаФакт</dataPath>
+				<field>СуммаФакт</field>
+				<valueType>
+					<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:decimal</Type>
+					<NumberQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+						<Digits>0</Digits>
+						<FractionDigits>0</FractionDigits>
+						<AllowedSign>Any</AllowedSign>
+					</NumberQualifiers>
+				</valueType>
+				<appearance>
+					<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+						<parameter>Формат</parameter>
+						<value xsi:type="xs:string">ЧДЦ=2; ЧН=</value>
+					</item>
+				</appearance>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ЗнакПлан</dataPath>
+				<field>ЗнакПлан</field>
+				<useRestriction>
+					<field>true</field>
+					<group>true</group>
+					<order>true</order>
+				</useRestriction>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ЗнакФакт</dataPath>
+				<field>ЗнакФакт</field>
+				<useRestriction>
+					<field>true</field>
+					<group>true</group>
+					<order>true</order>
+				</useRestriction>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СтатьяБюджетаЗнакПлан</dataPath>
+				<field>СтатьяБюджетаЗнакПлан</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СтатьяБюджетаЗнакФакт</dataPath>
+				<field>СтатьяБюджетаЗнакФакт</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СуммаОборотПлан</dataPath>
+				<field>СуммаОборотПлан</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>СуммаОборотФакт</dataPath>
+				<field>СуммаОборотФакт</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>АналитикаВидаБюджета</dataPath>
+				<field>АналитикаВидаБюджета</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>АналитикаУчетаБюджета</dataPath>
+				<field>АналитикаУчетаБюджета</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Контрагент</dataPath>
+				<field>Контрагент</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Номенклатура</dataPath>
+				<field>Номенклатура</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ПодКонтролем</dataPath>
+				<field>ПодКонтролем</field>
+				<role>
+					<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
+				</role>
+			</field>
+			<dataSource>ИсточникДанных1</dataSource>
+			<query>ВЫБРАТЬ РАЗРЕШЕННЫЕ
+	IT_АналитикаВидаБюджета.ВидБюджета,
+	IT_СценарийБюджета.Ссылка КАК СценарийБюджета,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета,
+	IT_АналитикаУчетаБюджета.Проект,
+	IT_АналитикаУчетаБюджета.Подразделение,
+	СУММА(IT_УчетБюджетовОбороты.СуммаОборот) КАК СуммаОборот,
+	ВЫБОР
+		КОГДА &amp;Периодичность = "День"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодДень
+		КОГДА &amp;Периодичность = "Неделя"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодНеделя
+		КОГДА &amp;Периодичность = "Месяц"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодМесяц
+		КОГДА &amp;Периодичность = "Квартал"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодКвартал
+		КОГДА &amp;Периодичность = "Год"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодГод
+	КОНЕЦ КАК Период,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета.Знак,
+	IT_АналитикаУчетаБюджета.Контрагент,
+	IT_АналитикаУчетаБюджета.Номенклатура
+ПОМЕСТИТЬ ВТ_ФактическиеДанные
+ИЗ
+	РегистрНакопления.IT_УчетБюджетов.Обороты(&amp;НачалоПериода, &amp;КонецПериода, Авто, ) КАК IT_УчетБюджетовОбороты
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.IT_АналитикаВидаБюджета КАК IT_АналитикаВидаБюджета
+		ПО IT_УчетБюджетовОбороты.АналитикаВидаБюджета = IT_АналитикаВидаБюджета.КлючАналитикиВидаБюджета
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.IT_АналитикаУчетаБюджета КАК IT_АналитикаУчетаБюджета
+		ПО IT_УчетБюджетовОбороты.АналитикаУчетаБюджета = IT_АналитикаУчетаБюджета.КлючАналитикиУчетаБюджета,
+	Справочник.IT_СценарийБюджета КАК IT_СценарийБюджета
+ГДЕ
+	IT_АналитикаВидаБюджета.СценарийБюджета = ЗНАЧЕНИЕ(Справочник.IT_СценарийБюджета.ПустаяСсылка)
+
+СГРУППИРОВАТЬ ПО
+	IT_АналитикаВидаБюджета.ВидБюджета,
+	IT_СценарийБюджета.Ссылка,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета,
+	IT_АналитикаУчетаБюджета.Проект,
+	IT_АналитикаУчетаБюджета.Подразделение,
+	ВЫБОР
+		КОГДА &amp;Периодичность = "День"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодДень
+		КОГДА &amp;Периодичность = "Неделя"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодНеделя
+		КОГДА &amp;Периодичность = "Месяц"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодМесяц
+		КОГДА &amp;Периодичность = "Квартал"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодКвартал
+		КОГДА &amp;Периодичность = "Год"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодГод
+	КОНЕЦ,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета.Знак,
+	IT_АналитикаУчетаБюджета.Контрагент,
+	IT_АналитикаУчетаБюджета.Номенклатура
+;
+
+////////////////////////////////////////////////////////////////////////////////
+ВЫБРАТЬ РАЗРЕШЕННЫЕ
+	IT_АналитикаВидаБюджета.ВидБюджета,
+	IT_АналитикаВидаБюджета.СценарийБюджета,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета,
+	IT_АналитикаУчетаБюджета.Проект,
+	IT_АналитикаУчетаБюджета.Подразделение,
+	СУММА(IT_УчетБюджетовОбороты.СуммаОборот) КАК СуммаОборот,
+	ВЫБОР
+		КОГДА &amp;Периодичность = "День"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодДень
+		КОГДА &amp;Периодичность = "Неделя"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодНеделя
+		КОГДА &amp;Периодичность = "Месяц"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодМесяц
+		КОГДА &amp;Периодичность = "Квартал"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодКвартал
+		КОГДА &amp;Периодичность = "Год"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодГод
+	КОНЕЦ КАК Период,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета.Знак,
+	IT_АналитикаУчетаБюджета.Контрагент,
+	IT_АналитикаУчетаБюджета.Номенклатура,
+	IT_УчетБюджетовОбороты.ПодКонтролем
+ПОМЕСТИТЬ ВТ_ПлановыеДанные
+ИЗ
+	РегистрНакопления.IT_УчетБюджетов.Обороты(&amp;НачалоПериода, &amp;КонецПериода, Авто, ) КАК IT_УчетБюджетовОбороты
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.IT_АналитикаВидаБюджета КАК IT_АналитикаВидаБюджета
+		ПО IT_УчетБюджетовОбороты.АналитикаВидаБюджета = IT_АналитикаВидаБюджета.КлючАналитикиВидаБюджета
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.IT_АналитикаУчетаБюджета КАК IT_АналитикаУчетаБюджета
+		ПО IT_УчетБюджетовОбороты.АналитикаУчетаБюджета = IT_АналитикаУчетаБюджета.КлючАналитикиУчетаБюджета
+
+СГРУППИРОВАТЬ ПО
+	IT_АналитикаВидаБюджета.ВидБюджета,
+	IT_АналитикаВидаБюджета.СценарийБюджета,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета,
+	IT_АналитикаУчетаБюджета.Проект,
+	IT_АналитикаУчетаБюджета.Подразделение,
+	ВЫБОР
+		КОГДА &amp;Периодичность = "День"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодДень
+		КОГДА &amp;Периодичность = "Неделя"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодНеделя
+		КОГДА &amp;Периодичность = "Месяц"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодМесяц
+		КОГДА &amp;Периодичность = "Квартал"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодКвартал
+		КОГДА &amp;Периодичность = "Год"
+			ТОГДА IT_УчетБюджетовОбороты.ПериодГод
+	КОНЕЦ,
+	IT_АналитикаУчетаБюджета.СтатьяБюджета.Знак,
+	IT_АналитикаУчетаБюджета.Контрагент,
+	IT_АналитикаУчетаБюджета.Номенклатура,
+	IT_УчетБюджетовОбороты.ПодКонтролем
+;
+
+////////////////////////////////////////////////////////////////////////////////
+ВЫБРАТЬ
+	ВТ_ПлановыеДанные.ВидБюджета,
+	ВТ_ПлановыеДанные.СценарийБюджета,
+	ВТ_ПлановыеДанные.СтатьяБюджета,
+	ВТ_ПлановыеДанные.Подразделение,
+	МИНИМУМ(ВТ_ПлановыеДанные.ПодКонтролем) КАК ПодКонтролем
+ПОМЕСТИТЬ ВТ_ПодКонтролем
+ИЗ
+	ВТ_ПлановыеДанные КАК ВТ_ПлановыеДанные
+
+СГРУППИРОВАТЬ ПО
+	ВТ_ПлановыеДанные.ВидБюджета,
+	ВТ_ПлановыеДанные.СценарийБюджета,
+	ВТ_ПлановыеДанные.СтатьяБюджета,
+	ВТ_ПлановыеДанные.Подразделение
+;
+
+////////////////////////////////////////////////////////////////////////////////
+ВЫБРАТЬ РАЗРЕШЕННЫЕ
+	Данные.ВидБюджета КАК ВидБюджета,
+	Данные.СценарийБюджета КАК СценарийБюджета,
+	Данные.СтатьяБюджета КАК СтатьяБюджета,
+	Данные.Проект КАК Проект,
+	Данные.Подразделение КАК Подразделение,
+	Данные.Период КАК Период,
+	Данные.СуммаОборотПлан КАК СуммаПлан,
+	Данные.СуммаОборотФакт КАК СуммаФакт,
+	Данные.СтатьяБюджетаЗнакПлан КАК ЗнакПлан,
+	Данные.СтатьяБюджетаЗнакФакт КАК ЗнакФакт,
+	Данные.Контрагент,
+	Данные.Номенклатура,
+	Данные.ПодКонтролем
+{ВЫБРАТЬ
+	ВидБюджета.*,
+	СценарийБюджета.*,
+	СтатьяБюджета.*,
+	Проект.*,
+	Подразделение.*,
+	Период,
+	СуммаПлан,
+	СуммаФакт,
+	ЗнакПлан,
+	ЗнакФакт}
+ИЗ
+	(ВЫБРАТЬ
+		ВТ_ФактическиеДанные.ВидБюджета КАК ВидБюджета,
+		ВТ_ФактическиеДанные.СценарийБюджета КАК СценарийБюджета,
+		ВТ_ФактическиеДанные.СтатьяБюджета КАК СтатьяБюджета,
+		ВТ_ФактическиеДанные.Проект КАК Проект,
+		ВТ_ФактическиеДанные.Подразделение КАК Подразделение,
+		ВТ_ФактическиеДанные.Период КАК Период,
+		0 КАК СуммаОборотПлан,
+		ВТ_ФактическиеДанные.СуммаОборот КАК СуммаОборотФакт,
+		0 КАК СтатьяБюджетаЗнакПлан,
+		ВТ_ФактическиеДанные.СтатьяБюджетаЗнак КАК СтатьяБюджетаЗнакФакт,
+		ВТ_ФактическиеДанные.Контрагент КАК Контрагент,
+		ВТ_ФактическиеДанные.Номенклатура КАК Номенклатура,
+		ЕСТЬNULL(ВТ_ПодКонтролем.ПодКонтролем, ЛОЖЬ) КАК ПодКонтролем
+	ИЗ
+		ВТ_ФактическиеДанные КАК ВТ_ФактическиеДанные
+			ЛЕВОЕ СОЕДИНЕНИЕ ВТ_ПодКонтролем КАК ВТ_ПодКонтролем
+			ПО ВТ_ФактическиеДанные.СценарийБюджета = ВТ_ПодКонтролем.СценарийБюджета
+				И ВТ_ФактическиеДанные.ВидБюджета = ВТ_ПодКонтролем.ВидБюджета
+				И ВТ_ФактическиеДанные.СтатьяБюджета = ВТ_ПодКонтролем.СтатьяБюджета
+				И ВТ_ФактическиеДанные.Подразделение = ВТ_ПодКонтролем.Подразделение
+	
+	ОБЪЕДИНИТЬ ВСЕ
+	
+	ВЫБРАТЬ
+		ВТ_ПлановыеДанные.ВидБюджета,
+		ВТ_ПлановыеДанные.СценарийБюджета,
+		ВТ_ПлановыеДанные.СтатьяБюджета,
+		ВТ_ПлановыеДанные.Проект,
+		ВТ_ПлановыеДанные.Подразделение,
+		ВТ_ПлановыеДанные.Период,
+		ВТ_ПлановыеДанные.СуммаОборот,
+		0,
+		ВТ_ПлановыеДанные.СтатьяБюджетаЗнак,
+		0,
+		ВТ_ПлановыеДанные.Контрагент,
+		ВТ_ПлановыеДанные.Номенклатура,
+		ВТ_ПлановыеДанные.ПодКонтролем
+	ИЗ
+		ВТ_ПлановыеДанные КАК ВТ_ПлановыеДанные) КАК Данные
+{ГДЕ
+	Данные.ВидБюджета.*,
+	Данные.СценарийБюджета.*,
+	Данные.СтатьяБюджета.*,
+	Данные.Проект.*,
+	Данные.Подразделение.*,
+	Данные.Период,
+	Данные.СуммаОборотПлан,
+	Данные.СуммаОборотФакт,
+	Данные.СтатьяБюджетаЗнакПлан,
+	Данные.СтатьяБюджетаЗнакФакт}</query>
+		</dataSet>
+		<calculatedField>
+			<dataPath>ОтклонениеСуммовое</dataPath>
+			<expression>СуммаФакт-СуммаПлан</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Отклонение суммовое</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:decimal</Type>
+				<NumberQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<Digits>0</Digits>
+					<FractionDigits>0</FractionDigits>
+					<AllowedSign>Any</AllowedSign>
+				</NumberQualifiers>
+			</valueType>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>ОтклонениеПроцентное</dataPath>
+			<expression>ВЫБОР КОГДА СуммаПлан=0 ТОГДА 100 ИНАЧЕ 100*(СуммаФакт*ЗнакФакт-СуммаПлан*ЗнакПлан)/СуммаПлан КОНЕЦ</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Отклонение процентное</d4p1:content>
+				</d4p1:item>
+			</title>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=2; ЧН=</value>
+				</item>
+			</appearance>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:decimal</Type>
+				<NumberQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<Digits>15</Digits>
+					<FractionDigits>2</FractionDigits>
+					<AllowedSign>Any</AllowedSign>
+				</NumberQualifiers>
+			</valueType>
+		</calculatedField>
+		<totalField>
+			<dataPath>ОтклонениеСуммовое</dataPath>
+			<expression>Сумма(ОтклонениеСуммовое)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>СуммаПлан</dataPath>
+			<expression>Сумма(СуммаПлан)</expression>
+			<group>Контрагент</group>
+			<group>Контрагент Иерархия</group>
+			<group>Номенклатура</group>
+			<group>Номенклатура Иерархия</group>
+			<group>СтатьяБюджета</group>
+			<group>СтатьяБюджета Иерархия</group>
+			<group>СуммаПлан</group>
+			<group>СуммаФакт</group>
+		</totalField>
+		<totalField>
+			<dataPath>СуммаФакт</dataPath>
+			<expression>Сумма(СуммаФакт)</expression>
+			<group>Контрагент</group>
+			<group>Контрагент Иерархия</group>
+			<group>Номенклатура</group>
+			<group>Номенклатура Иерархия</group>
+			<group>СтатьяБюджета</group>
+			<group>СтатьяБюджета Иерархия</group>
+			<group>СуммаПлан</group>
+			<group>СуммаФакт</group>
+		</totalField>
+		<totalField>
+			<dataPath>СуммаПлан</dataPath>
+			<expression>Сумма(СуммаПлан*ЗнакПлан)</expression>
+			<group>Подразделение</group>
+			<group>Проект</group>
+			<group>Проект Иерархия</group>
+			<group>СценарийБюджета</group>
+		</totalField>
+		<totalField>
+			<dataPath>СуммаФакт</dataPath>
+			<expression>Сумма(СуммаФакт*ЗнакФакт)</expression>
+			<group>Подразделение</group>
+			<group>Проект</group>
+			<group>Проект Иерархия</group>
+			<group>СценарийБюджета</group>
+		</totalField>
+		<totalField>
+			<dataPath>ОтклонениеПроцентное</dataPath>
+			<expression>100*(ВЫБОР КОГДА Сумма(СуммаПлан)=0 Тогда 1 иначе (Сумма(ЗнакФакт*СуммаФакт)-Сумма(ЗнакПлан*СуммаПлан))/Сумма(СуммаПлан*ЗнакПлан) Конец)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>СуммаПлан</dataPath>
+			<expression>0</expression>
+			<group>ОбщийИтог</group>
+		</totalField>
+		<totalField>
+			<dataPath>СуммаФакт</dataPath>
+			<expression>0</expression>
+			<group>ОбщийИтог</group>
+		</totalField>
+		<parameter>
+			<name>Периодичность</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Периодичность</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:string</Type>
+				<StringQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<Length>10</Length>
+					<AllowedLength>Variable</AllowedLength>
+				</StringQualifiers>
+			</valueType>
+			<value xsi:type="xs:string"/>
+			<useRestriction>false</useRestriction>
+			<availableValue>
+				<value xsi:type="xs:string">День</value>
+				<presentation xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>День</d5p1:content>
+					</d5p1:item>
+				</presentation>
+			</availableValue>
+			<availableValue>
+				<value xsi:type="xs:string">Неделя</value>
+				<presentation xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Неделя</d5p1:content>
+					</d5p1:item>
+				</presentation>
+			</availableValue>
+			<availableValue>
+				<value xsi:type="xs:string">Месяц</value>
+				<presentation xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Месяц</d5p1:content>
+					</d5p1:item>
+				</presentation>
+			</availableValue>
+			<availableValue>
+				<value xsi:type="xs:string">Квартал</value>
+				<presentation xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Квартал</d5p1:content>
+					</d5p1:item>
+				</presentation>
+			</availableValue>
+			<availableValue>
+				<value xsi:type="xs:string">Год</value>
+				<presentation xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Год</d5p1:content>
+					</d5p1:item>
+				</presentation>
+			</availableValue>
+		</parameter>
+		<parameter>
+			<name>НачалоПериода</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Начало периода</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
+				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<DateFractions>DateTime</DateFractions>
+				</DateQualifiers>
+			</valueType>
+			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>КонецПериода</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Конец периода</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
+				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<DateFractions>DateTime</DateFractions>
+				</DateQualifiers>
+			</valueType>
+			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>ЕстьГруппировкаПоПериодуРегистрации</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Есть группировка по периоду регистрации</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:boolean</Type>
+			</valueType>
+			<value xsi:type="xs:boolean">false</value>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<settingsVariant>
+			<name xmlns="http://v8.1c.ru/8.1/data-composition-system/settings">Основной</name>
+			<presentation xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="xs:string">Основной</presentation>
+		</settingsVariant>
+	</dataCompositionSchema>
+</SchemaFile>﻿<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<selection>
+		<item xsi:type="SelectedItemFolder">
+			<lwsTitle>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма</v8:content>
+				</v8:item>
+			</lwsTitle>
+			<item xsi:type="SelectedItemField">
+				<field>СуммаПлан</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>СуммаФакт</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>ОтклонениеСуммовое</field>
+			</item>
+			<placement>Auto</placement>
+		</item>
+	</selection>
+	<filter>
+		<item xsi:type="FilterItemComparison">
+			<left xsi:type="dcscor:Field">ВидБюджета</left>
+			<comparisonType>Equal</comparisonType>
+			<right xsi:type="dcscor:DesignTimeValue">Перечисление.IT_ВидыБюджета.БДР</right>
+			<viewMode>Inaccessible</viewMode>
+		</item>
+	</filter>
+	<dataParameters>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:parameter>Периодичность</dcscor:parameter>
+			<dcscor:value xsi:type="xs:string">Месяц</dcscor:value>
+		</dcscor:item>
+	</dataParameters>
+	<conditionalAppearance>
+		<item>
+			<selection>
+				<item>
+					<field>СценарийБюджета</field>
+				</item>
+			</selection>
+			<filter>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">СценарийБюджета</left>
+					<comparisonType>Equal</comparisonType>
+					<right xsi:type="dcscor:DesignTimeValue">Справочник.IT_СценарийБюджета.ПустаяСсылка</right>
+				</item>
+			</filter>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Текст</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">Факт</dcscor:value>
+				</dcscor:item>
+			</appearance>
+			<presentation xsi:type="xs:string">Представление факта</presentation>
+		</item>
+		<item>
+			<selection>
+				<item>
+					<field>КоличествоПлан</field>
+				</item>
+				<item>
+					<field>ОтклонениеКоличественное</field>
+				</item>
+				<item>
+					<field>КоличествоФакт</field>
+				</item>
+			</selection>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Формат</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">ЧЦ=15; ЧДЦ=3</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
+		<item>
+			<selection>
+				<item>
+					<field>СтатьяБюджета.Знак</field>
+				</item>
+			</selection>
+			<filter>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">СтатьяБюджета.Знак</left>
+					<comparisonType>GreaterOrEqual</comparisonType>
+					<right xsi:type="xs:decimal">0</right>
+				</item>
+			</filter>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Текст</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Статья доходов</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+			<presentation xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Статья доходов</v8:content>
+				</v8:item>
+			</presentation>
+		</item>
+		<item>
+			<selection>
+				<item>
+					<field>СтатьяБюджета.Знак</field>
+				</item>
+			</selection>
+			<filter>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">СтатьяБюджета.Знак</left>
+					<comparisonType>Less</comparisonType>
+					<right xsi:type="xs:decimal">0</right>
+				</item>
+			</filter>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Текст</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Статья доходов</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+			<presentation xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Статья расходов</v8:content>
+				</v8:item>
+			</presentation>
+		</item>
+		<item>
+			<selection/>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Формат</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>ДФ=dd.MM.yy</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+			<presentation xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Оформление периода</v8:content>
+				</v8:item>
+			</presentation>
+		</item>
+		<item>
+			<selection>
+				<item>
+					<field>ОтклонениеСуммовое</field>
+				</item>
+				<item>
+					<field>СуммаПлан</field>
+				</item>
+				<item>
+					<field>СуммаФакт</field>
+				</item>
+			</selection>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Формат</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">ЧЦ=15; ЧДЦ=2</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
+		<item>
+			<selection>
+				<item>
+					<field>ОтклонениеПроцентное</field>
+				</item>
+				<item>
+					<field>ОтклонениеСуммовое</field>
+				</item>
+				<item>
+					<field>СуммаПлан</field>
+				</item>
+				<item>
+					<field>СуммаФакт</field>
+				</item>
+			</selection>
+			<filter>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">ПодКонтролем</left>
+					<comparisonType>Equal</comparisonType>
+					<right xsi:type="xs:boolean">true</right>
+				</item>
+			</filter>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>ЦветФона</dcscor:parameter>
+					<dcscor:value xsi:type="v8ui:Color">#99CCFF</dcscor:value>
+				</dcscor:item>
+			</appearance>
+			<presentation xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Выделяем важное</v8:content>
+				</v8:item>
+			</presentation>
+		</item>
+	</conditionalAppearance>
+	<outputParameters>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:parameter>ГоризонтальноеРасположениеОбщихИтогов</dcscor:parameter>
+			<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">None</dcscor:value>
+		</dcscor:item>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:parameter>ВертикальноеРасположениеОбщихИтогов</dcscor:parameter>
+			<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">None</dcscor:value>
+		</dcscor:item>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:use>false</dcscor:use>
+			<dcscor:parameter>ТипДиаграммы</dcscor:parameter>
+			<dcscor:value xsi:type="v8ui:ChartType">Column3D</dcscor:value>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ТипДиаграммы.ВидПодписей</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:ChartLabelType">None</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ТипДиаграммы.ОтображатьТаблицуДанных</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</dcscor:item>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:use>false</dcscor:use>
+			<dcscor:parameter>ВыводитьПараметрыДанных</dcscor:parameter>
+			<dcscor:value xsi:type="DataCompositionTextOutputType">Output</dcscor:value>
+		</dcscor:item>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:parameter>ВыводитьОтбор</dcscor:parameter>
+			<dcscor:value xsi:type="DataCompositionTextOutputType">DontOutput</dcscor:value>
+		</dcscor:item>
+	</outputParameters>
+	<item xsi:type="StructureItemTable">
+		<column>
+			<groupItems>
+				<item xsi:type="GroupItemField">
+					<field>Период</field>
+					<groupType>Items</groupType>
+					<periodAdditionType>None</periodAdditionType>
+					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+				</item>
+			</groupItems>
+			<order>
+				<item xsi:type="OrderItemAuto"/>
+			</order>
+			<selection>
+				<item xsi:type="SelectedItemAuto"/>
+			</selection>
+		</column>
+		<row>
+			<groupItems>
+				<item xsi:type="GroupItemField">
+					<field>СценарийБюджета</field>
+					<groupType>Items</groupType>
+					<periodAdditionType>None</periodAdditionType>
+					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+				</item>
+			</groupItems>
+			<order>
+				<item xsi:type="OrderItemAuto"/>
+			</order>
+			<selection>
+				<item xsi:type="SelectedItemAuto"/>
+			</selection>
+			<item>
+				<groupItems>
+					<item xsi:type="GroupItemField">
+						<field>Проект</field>
+						<groupType>Items</groupType>
+						<periodAdditionType>None</periodAdditionType>
+						<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+						<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+					</item>
+				</groupItems>
+				<order>
+					<item xsi:type="OrderItemAuto"/>
+				</order>
+				<selection>
+					<item xsi:type="SelectedItemAuto"/>
+				</selection>
+				<item>
+					<groupItems>
+						<item xsi:type="GroupItemField">
+							<field>Подразделение</field>
+							<groupType>Items</groupType>
+							<periodAdditionType>None</periodAdditionType>
+							<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+							<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+						</item>
+					</groupItems>
+					<order>
+						<item xsi:type="OrderItemAuto"/>
+					</order>
+					<selection>
+						<item xsi:type="SelectedItemAuto"/>
+					</selection>
+					<item>
+						<groupItems>
+							<item xsi:type="GroupItemField">
+								<field>СтатьяБюджета</field>
+								<groupType>Items</groupType>
+								<periodAdditionType>None</periodAdditionType>
+								<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+								<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+							</item>
+						</groupItems>
+						<order>
+							<item xsi:type="OrderItemAuto"/>
+						</order>
+						<selection>
+							<item xsi:type="SelectedItemAuto"/>
+						</selection>
+					</item>
+				</item>
+			</item>
+		</row>
+	</item>
+</Settings>﻿<?xml version="1.0" encoding="UTF-8"?>
+<SchemaFile xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema">
+		<template>
+			<name>Макет1</name>
+			<template xmlns:dcsat="http://v8.1c.ru/8.1/data-composition-system/area-template" xsi:type="dcsat:AreaTemplate">
+				<dcsat:item xsi:type="dcsat:TableRow">
+					<dcsat:tableCell>
+						<dcsat:item xsi:type="dcsat:Field">
+							<dcsat:value xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xsi:type="dcscor:Parameter">ОтклонениеПроцентное</dcsat:value>
+							<dcsat:appearance>
+								<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core">
+									<parameter>Формат</parameter>
+									<value xsi:type="xs:string">ЧДЦ=2; ЧН=</value>
+								</item>
+							</dcsat:appearance>
+						</dcsat:item>
+						<dcsat:appIndex>0</dcsat:appIndex>
+					</dcsat:tableCell>
+				</dcsat:item>
+			</template>
+			<parameter xmlns:dcsat="http://v8.1c.ru/8.1/data-composition-system/area-template" xsi:type="dcsat:ExpressionAreaTemplateParameter">
+				<dcsat:name>ОтклонениеПроцентное</dcsat:name>
+				<dcsat:expression>ОКР(ОтклонениеПроцентное,2)</dcsat:expression>
+			</parameter>
+		</template>
+		<fieldTemplate>
+			<field>ОтклонениеПроцентное</field>
+			<template>Макет1</template>
+		</fieldTemplate>
+	</dataCompositionSchema>
+	<appearance xmlns="http://v8.1c.ru/8.1/data-composition-system/area-template" xsi:type="TableCellAppearance">
+		<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core">
+			<parameter>СтильГраницы</parameter>
+			<value xmlns:d4p1="http://v8.1c.ru/8.1/data/ui" xsi:type="d4p1:Line" width="0" gap="false">
+				<d4p1:style xsi:type="d4p1:SpreadsheetDocumentCellLineType">None</d4p1:style>
+			</value>
+			<item>
+				<parameter>СтильГраницы.Слева</parameter>
+				<value xmlns:d5p1="http://v8.1c.ru/8.1/data/ui" xsi:type="d5p1:Line" width="1" gap="false">
+					<d5p1:style xsi:type="d5p1:SpreadsheetDocumentCellLineType">Solid</d5p1:style>
+				</value>
+			</item>
+			<item>
+				<parameter>СтильГраницы.Сверху</parameter>
+				<value xmlns:d5p1="http://v8.1c.ru/8.1/data/ui" xsi:type="d5p1:Line" width="1" gap="false">
+					<d5p1:style xsi:type="d5p1:SpreadsheetDocumentCellLineType">Solid</d5p1:style>
+				</value>
+			</item>
+			<item>
+				<parameter>СтильГраницы.Справа</parameter>
+				<value xmlns:d5p1="http://v8.1c.ru/8.1/data/ui" xsi:type="d5p1:Line" width="1" gap="false">
+					<d5p1:style xsi:type="d5p1:SpreadsheetDocumentCellLineType">Solid</d5p1:style>
+				</value>
+			</item>
+			<item>
+				<parameter>СтильГраницы.Снизу</parameter>
+				<value xmlns:d5p1="http://v8.1c.ru/8.1/data/ui" xsi:type="d5p1:Line" width="1" gap="false">
+					<d5p1:style xsi:type="d5p1:SpreadsheetDocumentCellLineType">Solid</d5p1:style>
+				</value>
+			</item>
+		</item>
+		<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core">
+			<parameter>МинимальнаяШирина</parameter>
+			<value xsi:type="xs:decimal">17.75</value>
+		</item>
+		<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core">
+			<parameter>МаксимальнаяШирина</parameter>
+			<value xsi:type="xs:decimal">17.75</value>
+		</item>
+	</appearance>
+</SchemaFile>

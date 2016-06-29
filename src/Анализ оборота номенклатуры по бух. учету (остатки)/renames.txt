@@ -1,0 +1,12 @@
+﻿080aff5b-3692-493d-a1ae-1976508f98e4.0\info-->und\080aff5b-3692-493d-a1ae-1976508f98e4.0\info
+080aff5b-3692-493d-a1ae-1976508f98e4.0\text-->ObjectModule.bsl
+080aff5b-3692-493d-a1ae-1976508f98e4.1-->und\080aff5b-3692-493d-a1ae-1976508f98e4.1
+15ab4fe9-e495-4abb-b7bd-5537658c8082-->und\15ab4fe9-e495-4abb-b7bd-5537658c8082
+298cc76f-6d7d-426a-ac77-5e51b3bf9301-->und\298cc76f-6d7d-426a-ac77-5e51b3bf9301
+298cc76f-6d7d-426a-ac77-5e51b3bf9301.0-->Form\ФормаОтчета
+copyinfo-->und\copyinfo
+e9486b31-7ef3-4b19-be9c-36c032268112-->und\e9486b31-7ef3-4b19-be9c-36c032268112
+e9486b31-7ef3-4b19-be9c-36c032268112.0-->und\e9486b31-7ef3-4b19-be9c-36c032268112.0
+root-->und\root
+version-->und\version
+versions-->und\versions

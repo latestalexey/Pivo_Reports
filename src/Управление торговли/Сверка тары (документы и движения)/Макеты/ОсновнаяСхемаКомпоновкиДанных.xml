@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SchemaFile xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema">
+		<dataSource>
+			<name>ИсточникДанных1</name>
+			<dataSourceType>Local</dataSourceType>
+		</dataSource>
+		<dataSet xsi:type="DataSetQuery">
+			<name>НаборДанных1</name>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Грузополучатель</dataPath>
+				<field>Грузополучатель</field>
+				<role>
+					<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоОборот</dataPath>
+				<field>КоличествоОборот</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Контрагент</dataPath>
+				<field>Контрагент</field>
+				<role>
+					<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Номенклатура</dataPath>
+				<field>Номенклатура</field>
+				<role>
+					<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Организация</dataPath>
+				<field>Организация</field>
+				<role>
+					<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Регистратор</dataPath>
+				<field>Регистратор</field>
+				<role>
+					<periodNumber xmlns="http://v8.1c.ru/8.1/data-composition-system/common">1</periodNumber>
+					<periodType xmlns="http://v8.1c.ru/8.1/data-composition-system/common">Main</periodType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Склад</dataPath>
+				<field>Склад</field>
+			</field>
+			<dataSource>ИсточникДанных1</dataSource>
+			<query>ВЫБРАТЬ
+	ВложенныйЗапрос.Организация КАК Организация,
+	ВложенныйЗапрос.Склад КАК Склад,
+	ВложенныйЗапрос.Контрагент КАК Контрагент,
+	ВложенныйЗапрос.Грузополучатель КАК Грузополучатель,
+	ВложенныйЗапрос.Номенклатура КАК Номенклатура,
+	ВложенныйЗапрос.Регистратор КАК Регистратор,
+	СУММА(ВложенныйЗапрос.КоличествоОборот) КАК КоличествоОборот
+{ВЫБРАТЬ
+	Организация.*,
+	Склад.*,
+	Контрагент.*,
+	Грузополучатель.*,
+	Номенклатура.*,
+	Регистратор.*,
+	КоличествоОборот}
+ИЗ
+	(ВЫБРАТЬ
+		ТоварыПереданныеОбороты.Регистратор КАК Регистратор,
+		ТоварыПереданныеОбороты.Контрагент КАК Контрагент,
+		ТоварыПереданныеОбороты.Организация КАК Организация,
+		ТоварыПереданныеОбороты.Грузополучатель КАК Грузополучатель,
+		ТоварыПереданныеОбороты.Номенклатура КАК Номенклатура,
+		ТоварыПереданныеОбороты.КоличествоОборот КАК КоличествоОборот,
+		ВЫБОР
+			КОГДА ТоварыПереданныеОбороты.Регистратор ССЫЛКА Документ.ВозвратТоваровОтПокупателя
+				ТОГДА ТоварыПереданныеОбороты.Регистратор.СкладОрдер
+			ИНАЧЕ ТоварыПереданныеОбороты.Регистратор.Склад
+		КОНЕЦ КАК Склад
+	ИЗ
+		РегистрНакопления.ТоварыПереданные.Обороты(&amp;НачалоПериода, &amp;КонецПериода, Регистратор, Номенклатура В (&amp;СпНоменклатуры)) КАК ТоварыПереданныеОбороты
+	
+	ОБЪЕДИНИТЬ ВСЕ
+	
+	ВЫБРАТЬ
+		ДанныеПоДокументам.Регистратор,
+		ДанныеПоДокументам.Контрагент,
+		ДанныеПоДокументам.Организация,
+		ДанныеПоДокументам.Грузополучатель,
+		ДанныеПоДокументам.Номенклатура,
+		-ДанныеПоДокументам.Количество,
+		ДанныеПоДокументам.Склад
+	ИЗ
+		(ВЫБРАТЬ
+			РеализацияТоваровУслуг.Ссылка КАК Регистратор,
+			РеализацияТоваровУслуг.Организация КАК Организация,
+			РеализацияТоваровУслуг.Контрагент КАК Контрагент,
+			ВЫБОР
+				КОГДА РеализацияТоваровУслуг.Грузополучатель = ЗНАЧЕНИЕ(Справочник.Контрагенты.ПустаяССылка)
+					ТОГДА РеализацияТоваровУслуг.Контрагент
+				ИНАЧЕ РеализацияТоваровУслуг.Грузополучатель
+			КОНЕЦ КАК Грузополучатель,
+			РеализацияТоваровУслугВозвратнаяТара.Номенклатура КАК Номенклатура,
+			РеализацияТоваровУслугВозвратнаяТара.Количество КАК Количество,
+			РеализацияТоваровУслуг.Склад КАК Склад
+		ИЗ
+			Документ.РеализацияТоваровУслуг.ВозвратнаяТара КАК РеализацияТоваровУслугВозвратнаяТара
+				ЛЕВОЕ СОЕДИНЕНИЕ Документ.РеализацияТоваровУслуг КАК РеализацияТоваровУслуг
+				ПО РеализацияТоваровУслугВозвратнаяТара.Ссылка = РеализацияТоваровУслуг.Ссылка
+		ГДЕ
+			РеализацияТоваровУслуг.Проведен
+			И РеализацияТоваровУслуг.Дата МЕЖДУ &amp;НачалоПериода И &amp;КонецПериода
+		
+		ОБЪЕДИНИТЬ ВСЕ
+		
+		ВЫБРАТЬ
+			ВозвратТоваровОтПокупателя.Ссылка,
+			ВозвратТоваровОтПокупателя.Организация,
+			ВозвратТоваровОтПокупателя.Контрагент,
+			ВЫБОР
+				КОГДА ВозвратТоваровОтПокупателя.Контрагент2 = ЗНАЧЕНИЕ(Справочник.Контрагенты.ПУстаяССылка)
+					ТОГДА ВозвратТоваровОтПокупателя.Контрагент
+				ИНАЧЕ ВозвратТоваровОтПокупателя.Контрагент2
+			КОНЕЦ,
+			ВозвратТоваровОтПокупателяВозвратнаяТара.Номенклатура,
+			-ВозвратТоваровОтПокупателяВозвратнаяТара.Количество,
+			ВозвратТоваровОтПокупателя.СкладОрдер
+		ИЗ
+			Документ.ВозвратТоваровОтПокупателя.ВозвратнаяТара КАК ВозвратТоваровОтПокупателяВозвратнаяТара
+				ЛЕВОЕ СОЕДИНЕНИЕ Документ.ВозвратТоваровОтПокупателя КАК ВозвратТоваровОтПокупателя
+				ПО ВозвратТоваровОтПокупателяВозвратнаяТара.Ссылка = ВозвратТоваровОтПокупателя.Ссылка
+		ГДЕ
+			ВозвратТоваровОтПокупателя.Проведен
+			И ВозвратТоваровОтПокупателя.Дата МЕЖДУ &amp;НачалоПериода И &amp;КонецПериода) КАК ДанныеПоДокументам
+	ГДЕ
+		ДанныеПоДокументам.Номенклатура В(&amp;СпНоменклатуры)) КАК ВложенныйЗапрос
+{ГДЕ
+	ВложенныйЗапрос.Регистратор.*,
+	ВложенныйЗапрос.Контрагент.*,
+	ВложенныйЗапрос.Организация.*,
+	ВложенныйЗапрос.Грузополучатель.*,
+	ВложенныйЗапрос.Номенклатура.*,
+	ВложенныйЗапрос.КоличествоОборот}
+
+СГРУППИРОВАТЬ ПО
+	ВложенныйЗапрос.Грузополучатель,
+	ВложенныйЗапрос.Регистратор,
+	ВложенныйЗапрос.Номенклатура,
+	ВложенныйЗапрос.Организация,
+	ВложенныйЗапрос.Контрагент,
+	ВложенныйЗапрос.Склад
+
+ИМЕЮЩИЕ
+	СУММА(ВложенныйЗапрос.КоличествоОборот) &lt;&gt; 0
+
+УПОРЯДОЧИТЬ ПО
+	Организация,
+	Контрагент,
+	Грузополучатель,
+	Номенклатура,
+	ВложенныйЗапрос.Регистратор.Дата</query>
+			<autoFillFields>false</autoFillFields>
+		</dataSet>
+		<totalField>
+			<dataPath>КоличествоОборот</dataPath>
+			<expression>Сумма(КоличествоОборот)</expression>
+		</totalField>
+		<parameter>
+			<name>НачалоПериода</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Начало периода</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
+				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<DateFractions>DateTime</DateFractions>
+				</DateQualifiers>
+			</valueType>
+			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+			<useRestriction>true</useRestriction>
+			<expression>НачалоПериода(&amp;ПериодОтчета.ДатаНачала,"ДЕНЬ")</expression>
+		</parameter>
+		<parameter>
+			<name>КонецПериода</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Конец периода</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
+				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<DateFractions>DateTime</DateFractions>
+				</DateQualifiers>
+			</valueType>
+			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+			<useRestriction>true</useRestriction>
+			<expression>ВЫБОР КОГДА &amp;ПериодОтчета.ДатаОкончания=ДАТАВРЕМЯ(1,1,1) ТОГДА ДАТАВРЕМЯ(3999,12,31,23,59,59) ИНАЧЕ КонецПериода(&amp;ПериодОтчета.ДатаОкончания,"ДЕНЬ") КОНЕЦ</expression>
+		</parameter>
+		<parameter>
+			<name>СпНоменклатуры</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Сп номенклатуры</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.Номенклатура</Type>
+			</valueType>
+			<useRestriction>true</useRestriction>
+			<valueListAllowed>true</valueListAllowed>
+		</parameter>
+		<parameter>
+			<name>ПериодОтчета</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Период отчета</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">StandardPeriod</Type>
+			</valueType>
+			<value xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:StandardPeriod">
+				<d4p1:variant xsi:type="d4p1:StandardPeriodVariant">ThisMonth</d4p1:variant>
+			</value>
+			<useRestriction>false</useRestriction>
+		</parameter>
+		<settingsVariant>
+			<name xmlns="http://v8.1c.ru/8.1/data-composition-system/settings">Основной</name>
+			<presentation xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="xs:string">Основной</presentation>
+		</settingsVariant>
+	</dataCompositionSchema>
+</SchemaFile>﻿<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<selection>
+		<item xsi:type="SelectedItemField">
+			<field>Организация</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>Контрагент</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>Грузополучатель</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>Номенклатура</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>Регистратор</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>КоличествоОборот</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>Склад</field>
+		</item>
+	</selection>
+	<filter>
+		<item xsi:type="FilterItemComparison">
+			<use>false</use>
+			<left xsi:type="dcscor:Field">Организация</left>
+			<comparisonType>Equal</comparisonType>
+		</item>
+		<item xsi:type="FilterItemComparison">
+			<use>false</use>
+			<left xsi:type="dcscor:Field">Контрагент</left>
+			<comparisonType>Equal</comparisonType>
+		</item>
+	</filter>
+	<dataParameters>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:parameter>ПериодОтчета</dcscor:parameter>
+			<dcscor:value xsi:type="v8:StandardPeriod">
+				<v8:variant xsi:type="v8:StandardPeriodVariant">ThisMonth</v8:variant>
+			</dcscor:value>
+		</dcscor:item>
+	</dataParameters>
+	<order>
+		<item xsi:type="OrderItemField">
+			<field>Организация</field>
+			<orderType>Asc</orderType>
+		</item>
+		<item xsi:type="OrderItemField">
+			<field>Контрагент</field>
+			<orderType>Asc</orderType>
+		</item>
+		<item xsi:type="OrderItemField">
+			<field>Номенклатура</field>
+			<orderType>Asc</orderType>
+		</item>
+		<item xsi:type="OrderItemField">
+			<field>Регистратор.Дата</field>
+			<orderType>Asc</orderType>
+		</item>
+	</order>
+	<item xsi:type="StructureItemGroup">
+		<groupItems>
+			<item xsi:type="GroupItemField">
+				<field>Организация</field>
+				<groupType>Items</groupType>
+				<periodAdditionType>None</periodAdditionType>
+				<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+				<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+			</item>
+		</groupItems>
+		<order>
+			<item xsi:type="OrderItemAuto"/>
+		</order>
+		<selection>
+			<item xsi:type="SelectedItemAuto"/>
+		</selection>
+		<item xsi:type="StructureItemGroup">
+			<groupItems>
+				<item xsi:type="GroupItemField">
+					<field>Склад</field>
+					<groupType>Items</groupType>
+					<periodAdditionType>None</periodAdditionType>
+					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+				</item>
+			</groupItems>
+			<order>
+				<item xsi:type="OrderItemAuto"/>
+			</order>
+			<selection>
+				<item xsi:type="SelectedItemAuto"/>
+			</selection>
+			<item xsi:type="StructureItemGroup">
+				<groupItems>
+					<item xsi:type="GroupItemField">
+						<field>Контрагент</field>
+						<groupType>Items</groupType>
+						<periodAdditionType>None</periodAdditionType>
+						<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+						<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+					</item>
+				</groupItems>
+				<order>
+					<item xsi:type="OrderItemAuto"/>
+				</order>
+				<selection>
+					<item xsi:type="SelectedItemAuto"/>
+				</selection>
+				<item xsi:type="StructureItemGroup">
+					<order>
+						<item xsi:type="OrderItemAuto"/>
+					</order>
+					<selection>
+						<item xsi:type="SelectedItemAuto"/>
+					</selection>
+				</item>
+			</item>
+		</item>
+	</item>
+</Settings>﻿<?xml version="1.0" encoding="UTF-8"?>
+<SchemaFile xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema"/>
+</SchemaFile>
