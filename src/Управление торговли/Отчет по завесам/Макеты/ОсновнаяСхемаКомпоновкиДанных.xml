@@ -1,0 +1,1418 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SchemaFile xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema">
+		<dataSource>
+			<name>ИсточникДанных1</name>
+			<dataSourceType>Local</dataSourceType>
+		</dataSource>
+		<dataSet xsi:type="DataSetQuery">
+			<name>ТаблицаДат</name>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Период</dataPath>
+				<field>Период</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Период</d5p1:content>
+					</d5p1:item>
+				</title>
+				<appearance>
+					<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+						<parameter>Формат</parameter>
+						<value xsi:type="xs:string">ДФ=dd.MM.yyyy</value>
+					</item>
+				</appearance>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Склад</dataPath>
+				<field>Склад</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ТипЦенСклада</dataPath>
+				<field>ТипЦенСклада</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>НормаПрироста</dataPath>
+				<field>НормаПрироста</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ДатаИнв</dataPath>
+				<field>ДатаИнв</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Подразделение</dataPath>
+				<field>Подразделение</field>
+			</field>
+			<dataSource>ИсточникДанных1</dataSource>
+			<query>ВЫБРАТЬ РАЗРЕШЕННЫЕ
+	ВложенныйЗапрос.Период КАК Период,
+	ВложенныйЗапрос.Склад КАК Склад,
+	ВложенныйЗапрос.Склад.Подразделение КАК Подразделение,
+	ВложенныйЗапрос.ДатаПоследнейИнв КАК ДатаИнв,
+	ВложенныйЗапрос.Склад.ТипЦенРозничнойТорговли КАК ТипЦенСклада,
+	ВложенныйЗапрос.НормаПрироста КАК НормаПрироста
+{ВЫБРАТЬ
+	Период,
+	ДатаИнв,
+	ТипЦенСклада.*,
+	Склад.*,
+	Подразделение.*,
+	НормаПрироста}
+ИЗ
+	(ВЫБРАТЬ
+		ТаблицаДатСкладов.Период КАК Период,
+		ТаблицаДатСкладов.Склад КАК Склад,
+		МАКСИМУМ(ЕСТЬNULL(ВыборкаИнвентаризаций.Дата, ДАТАВРЕМЯ(1, 1, 1))) КАК ДатаПоследнейИнв,
+		ТаблицаДатСкладов.НормаПрироста КАК НормаПрироста
+	ИЗ
+		(ВЫБРАТЬ
+			ТаблицаДат.Период КАК Период,
+			СписокСкладов.Ссылка КАК Склад,
+			СписокСкладов.НормаПрироста КАК НормаПрироста
+		ИЗ
+			(ВЫБРАТЬ
+				ДОБАВИТЬКДАТЕ(&amp;НачалоПериода, ДЕНЬ, aa.a * 1000 + bb.b * 100 + cc.c * 10 + dd.d) КАК Период
+			{ВЫБРАТЬ
+				Период}
+			ИЗ
+				(ВЫБРАТЬ
+					0 КАК a
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					1
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					2
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					3
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					4
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					5
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					6
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					7
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					8
+				
+				ОБЪЕДИНИТЬ
+				
+				ВЫБРАТЬ
+					9) КАК aa
+					ПОЛНОЕ СОЕДИНЕНИЕ (ВЫБРАТЬ
+						0 КАК b
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						1
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						2
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						3
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						4
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						5
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						6
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						7
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						8
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						9) КАК bb
+					ПО (ИСТИНА)
+					ПОЛНОЕ СОЕДИНЕНИЕ (ВЫБРАТЬ
+						0 КАК c
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						1
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						2
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						3
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						4
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						5
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						6
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						7
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						8
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						9) КАК cc
+					ПО (ИСТИНА)
+					ПОЛНОЕ СОЕДИНЕНИЕ (ВЫБРАТЬ
+						0 КАК d
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						1
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						2
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						3
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						4
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						5
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						6
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						7
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						8
+					
+					ОБЪЕДИНИТЬ
+					
+					ВЫБРАТЬ
+						9) КАК dd
+					ПО (ИСТИНА)
+			ГДЕ
+				aa.a * 1000 + bb.b * 100 + cc.c * 10 + dd.d &lt;= РАЗНОСТЬДАТ(&amp;НачалоПериода, &amp;КонецПериода, ДЕНЬ)) КАК ТаблицаДат,
+			(ВЫБРАТЬ
+				Склады.Ссылка КАК Ссылка,
+				ВЫБОР
+					КОГДА ЗначенияСвойствОбъектов.Значение ЕСТЬ NULL 
+						ТОГДА 0.01
+					ИНАЧЕ (ВЫРАЗИТЬ(ЗначенияСвойствОбъектов.Значение КАК ЧИСЛО)) / 100
+				КОНЕЦ КАК НормаПрироста
+			{ВЫБРАТЬ
+				Ссылка.* КАК Склад}
+			ИЗ
+				Справочник.Склады КАК Склады
+					ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.ЗначенияСвойствОбъектов КАК ЗначенияСвойствОбъектов
+					ПО Склады.Ссылка = ЗначенияСвойствОбъектов.Объект
+						И (ЗначенияСвойствОбъектов.Свойство = &amp;СвойствоНормаПрироста)
+			ГДЕ
+				НЕ Склады.ПометкаУдаления
+				И Склады.ВидСклада = ЗНАЧЕНИЕ(Перечисление.ВидыСкладов.Розничный)
+			{ГДЕ
+				Склады.Ссылка.* КАК Склад}) КАК СписокСкладов) КАК ТаблицаДатСкладов
+			ЛЕВОЕ СОЕДИНЕНИЕ (ВЫБРАТЬ
+				ИнвентаризацияТоваровНаСкладе.Ссылка КАК Ссылка,
+				ИнвентаризацияТоваровНаСкладе.Дата КАК Дата,
+				ИнвентаризацияТоваровНаСкладе.Склад КАК Склад
+			ИЗ
+				Документ.ИнвентаризацияТоваровНаСкладе.Товары КАК ИнвентаризацияТоваровНаСкладеТовары
+					ЛЕВОЕ СОЕДИНЕНИЕ Документ.ИнвентаризацияТоваровНаСкладе КАК ИнвентаризацияТоваровНаСкладе
+					ПО ИнвентаризацияТоваровНаСкладеТовары.Ссылка = ИнвентаризацияТоваровНаСкладе.Ссылка
+			ГДЕ
+				НЕ ИнвентаризацияТоваровНаСкладе.ПометкаУдаления
+				И ИнвентаризацияТоваровНаСкладе.Дата &lt;= &amp;КонецПериода
+				И ИнвентаризацияТоваровНаСкладе.Ответственный = &amp;Инвентаризатор
+				И ИнвентаризацияТоваровНаСкладеТовары.Номенклатура.КлассВыгрузки = &amp;КлассВыгрузки) КАК ВыборкаИнвентаризаций
+			ПО ТаблицаДатСкладов.Период &gt;= ВыборкаИнвентаризаций.Дата
+				И ТаблицаДатСкладов.Склад = ВыборкаИнвентаризаций.Склад
+	
+	СГРУППИРОВАТЬ ПО
+		ТаблицаДатСкладов.Период,
+		ТаблицаДатСкладов.Склад,
+		ТаблицаДатСкладов.НормаПрироста) КАК ВложенныйЗапрос</query>
+			<autoFillFields>false</autoFillFields>
+		</dataSet>
+		<dataSet xsi:type="DataSetQuery">
+			<name>ТаблицаТовары</name>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Номенклатура</dataPath>
+				<field>Номенклатура</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Номенклатура</d5p1:content>
+					</d5p1:item>
+				</title>
+				<role>
+					<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
+				</role>
+				<valueType>
+					<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d6p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d6p1:CatalogRef.Номенклатура</Type>
+				</valueType>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Склад</dataPath>
+				<field>Склад</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Склад</d5p1:content>
+					</d5p1:item>
+				</title>
+				<valueType>
+					<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d6p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d6p1:CatalogRef.Склады</Type>
+				</valueType>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Период</dataPath>
+				<field>Период</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Период</d5p1:content>
+					</d5p1:item>
+				</title>
+				<appearance>
+					<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+						<parameter>Формат</parameter>
+						<value xsi:type="xs:string">ДФ=dd.MM.yyyy</value>
+					</item>
+				</appearance>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоНачальныйОстаток</dataPath>
+				<field>КоличествоНачальныйОстаток</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Начальный остаток</d5p1:content>
+					</d5p1:item>
+				</title>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоОприходование</dataPath>
+				<field>КоличествоОприходование</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Цена</dataPath>
+				<field>Цена</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ЦенаНорма</dataPath>
+				<field>ЦенаНорма</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ДатаИнв</dataPath>
+				<field>ДатаИнв</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоЗавес</dataPath>
+				<field>КоличествоЗавес</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоКонечныйОстаток</dataPath>
+				<field>КоличествоКонечныйОстаток</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоПрочее</dataPath>
+				<field>КоличествоПрочее</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоСписание</dataPath>
+				<field>КоличествоСписание</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоИнв</dataPath>
+				<field>КоличествоИнв</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ЕстьЗавес</dataPath>
+				<field>ЕстьЗавес</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ТипЦенСклада</dataPath>
+				<field>ТипЦенСклада</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоПеремещение</dataPath>
+				<field>КоличествоПеремещение</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоПродажи</dataPath>
+				<field>КоличествоПродажи</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>НормаПрироста</dataPath>
+				<field>НормаПрироста</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ПродажиОборот</dataPath>
+				<field>ПродажиОборот</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Подразделение</dataPath>
+				<field>Подразделение</field>
+			</field>
+			<dataSource>ИсточникДанных1</dataSource>
+			<query>ВЫБРАТЬ
+	НАЧАЛОПЕРИОДА(&amp;Период, ДЕНЬ) КАК Период,
+	ИнвентаризацияТоваровНаСкладе.Склад КАК Склад,
+	ИнвентаризацияТоваровНаСкладеТовары.Номенклатура КАК Номенклатура,
+	ИнвентаризацияТоваровНаСкладеТовары.Количество КАК Количество,
+	ИнвентаризацияТоваровНаСкладеТовары.Сумма КАК Сумма
+ПОМЕСТИТЬ ДанныеПоЗавесам
+ИЗ
+	Документ.ИнвентаризацияТоваровНаСкладе.Товары КАК ИнвентаризацияТоваровНаСкладеТовары
+		ЛЕВОЕ СОЕДИНЕНИЕ Документ.ИнвентаризацияТоваровНаСкладе КАК ИнвентаризацияТоваровНаСкладе
+		ПО ИнвентаризацияТоваровНаСкладеТовары.Ссылка = ИнвентаризацияТоваровНаСкладе.Ссылка
+ГДЕ
+	ИнвентаризацияТоваровНаСкладе.Дата МЕЖДУ НАЧАЛОПЕРИОДА(&amp;Период, ДЕНЬ) И КОНЕЦПЕРИОДА(&amp;Период, ДЕНЬ)
+	И НЕ ИнвентаризацияТоваровНаСкладе.ПометкаУдаления
+	И ИнвентаризацияТоваровНаСкладе.Склад = &amp;Склад
+	И ИнвентаризацияТоваровНаСкладеТовары.Номенклатура.КлассВыгрузки = &amp;КлассВыгрузки
+;
+
+////////////////////////////////////////////////////////////////////////////////
+ВЫБРАТЬ
+	ВложенныйЗапрос.Склад КАК Склад,
+	ВложенныйЗапрос.Номенклатура КАК Номенклатура,
+	ВложенныйЗапрос.КоличествоНачальныйОстаток КАК КоличествоНачальныйОстаток,
+	ВложенныйЗапрос.КоличествоОприходование КАК КоличествоОприходование,
+	ВложенныйЗапрос.КолчествоПеремещение КАК КоличествоПеремещение,
+	ВложенныйЗапрос.КолчествоПродажи КАК КоличествоПродажи,
+	ВложенныйЗапрос.КоличествоСписание КАК КоличествоСписание,
+	ВложенныйЗапрос.КоличествоПрочее КАК КоличествоПрочее,
+	ВложенныйЗапрос.КоличествоКонечныйОстаток КАК КоличествоКонечныйОстаток,
+	СУММА(ВЫБОР
+			КОГДА ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.ОтчетОРозничныхПродажах
+				ТОГДА -ЕСТЬNULL(ТоварыВРозницеОбороты.КоличествоОборот, 0)
+			ИНАЧЕ 0
+		КОНЕЦ) КАК КоличествоИнв
+ПОМЕСТИТЬ ДанныеПоРегистрам
+ИЗ
+	(ВЫБРАТЬ
+		ЕСТЬNULL(ТоварыВРозницеОбороты.Склад, ТоварыВРозницеОстаткиИОбороты.Склад) КАК Склад,
+		ЕСТЬNULL(ТоварыВРозницеОбороты.Номенклатура, ТоварыВРозницеОстаткиИОбороты.Номенклатура) КАК Номенклатура,
+		ТоварыВРозницеОстаткиИОбороты.КоличествоНачальныйОстаток КАК КоличествоНачальныйОстаток,
+		СУММА(ВЫБОР
+				КОГДА ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.ОприходованиеТоваров
+					ТОГДА ТоварыВРозницеОбороты.КоличествоОборот
+				ИНАЧЕ 0
+			КОНЕЦ) КАК КоличествоОприходование,
+		СУММА(ВЫБОР
+				КОГДА ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.ПеремещениеТоваров
+					ТОГДА ТоварыВРозницеОбороты.КоличествоОборот
+				ИНАЧЕ 0
+			КОНЕЦ) КАК КолчествоПеремещение,
+		СУММА(ВЫБОР
+				КОГДА ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.ОтчетОРозничныхПродажах
+					ТОГДА -ТоварыВРозницеОбороты.КоличествоОборот
+				ИНАЧЕ 0
+			КОНЕЦ) КАК КолчествоПродажи,
+		СУММА(ВЫБОР
+				КОГДА ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.СписаниеТоваров
+					ТОГДА -ТоварыВРозницеОбороты.КоличествоОборот
+				ИНАЧЕ 0
+			КОНЕЦ) КАК КоличествоСписание,
+		СУММА(ВЫБОР
+				КОГДА НЕ(ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.ОприходованиеТоваров
+							ИЛИ ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.ПеремещениеТоваров
+							ИЛИ ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.ОтчетОРозничныхПродажах
+							ИЛИ ТоварыВРозницеОбороты.Регистратор ССЫЛКА Документ.СписаниеТоваров)
+					ТОГДА ТоварыВРозницеОбороты.КоличествоОборот
+				ИНАЧЕ 0
+			КОНЕЦ) КАК КоличествоПрочее,
+		ТоварыВРозницеОстаткиИОбороты.КоличествоКонечныйОстаток КАК КоличествоКонечныйОстаток
+	ИЗ
+		РегистрНакопления.ТоварыВРознице.ОстаткиИОбороты(
+				НАЧАЛОПЕРИОДА(&amp;Период, ДЕНЬ),
+				КОНЕЦПЕРИОДА(&amp;Период, ДЕНЬ),
+				,
+				,
+				Склад = &amp;Склад
+					И Номенклатура.КлассВыгрузки = &amp;КлассВыгрузки) КАК ТоварыВРозницеОстаткиИОбороты
+			ЛЕВОЕ СОЕДИНЕНИЕ РегистрНакопления.ТоварыВРознице.Обороты(
+					НАЧАЛОПЕРИОДА(&amp;Период, ДЕНЬ),
+					КОНЕЦПЕРИОДА(&amp;Период, ДЕНЬ),
+					Регистратор,
+					Склад = &amp;Склад
+						И Номенклатура.КлассВыгрузки = &amp;КлассВыгрузки) КАК ТоварыВРозницеОбороты
+			ПО (ТоварыВРозницеОбороты.Номенклатура = ТоварыВРозницеОстаткиИОбороты.Номенклатура)
+				И (ТоварыВРозницеОбороты.Склад = ТоварыВРозницеОстаткиИОбороты.Склад)
+				И (ТоварыВРозницеОбороты.ХарактеристикаНоменклатуры = ТоварыВРозницеОстаткиИОбороты.ХарактеристикаНоменклатуры)
+				И (ТоварыВРозницеОбороты.СерияНоменклатуры = ТоварыВРозницеОстаткиИОбороты.СерияНоменклатуры)
+				И (ТоварыВРозницеОбороты.Качество = ТоварыВРозницеОстаткиИОбороты.Качество)
+	
+	СГРУППИРОВАТЬ ПО
+		ТоварыВРозницеОстаткиИОбороты.КоличествоНачальныйОстаток,
+		ТоварыВРозницеОстаткиИОбороты.КоличествоКонечныйОстаток,
+		ЕСТЬNULL(ТоварыВРозницеОбороты.Склад, ТоварыВРозницеОстаткиИОбороты.Склад),
+		ЕСТЬNULL(ТоварыВРозницеОбороты.Номенклатура, ТоварыВРозницеОстаткиИОбороты.Номенклатура)) КАК ВложенныйЗапрос
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрНакопления.ТоварыВРознице.Обороты(
+				&amp;ДатаИнв,
+				КОНЕЦПЕРИОДА(&amp;Период, ДЕНЬ),
+				Регистратор,
+				Склад = &amp;Склад
+					И Номенклатура.КлассВыгрузки = &amp;КлассВыгрузки) КАК ТоварыВРозницеОбороты
+		ПО (ТоварыВРозницеОбороты.Номенклатура = ВложенныйЗапрос.Номенклатура)
+			И (ТоварыВРозницеОбороты.Склад = ВложенныйЗапрос.Склад)
+
+СГРУППИРОВАТЬ ПО
+	ВложенныйЗапрос.Склад,
+	ВложенныйЗапрос.Номенклатура,
+	ВложенныйЗапрос.КоличествоНачальныйОстаток,
+	ВложенныйЗапрос.КоличествоОприходование,
+	ВложенныйЗапрос.КолчествоПеремещение,
+	ВложенныйЗапрос.КолчествоПродажи,
+	ВложенныйЗапрос.КоличествоСписание,
+	ВложенныйЗапрос.КоличествоПрочее,
+	ВложенныйЗапрос.КоличествоКонечныйОстаток
+;
+
+////////////////////////////////////////////////////////////////////////////////
+ВЫБРАТЬ
+	ВложенныйЗапрос.Склад,
+	ВложенныйЗапрос.Номенклатура,
+	СУММА(ВложенныйЗапрос.Количество) КАК Количество,
+	СУММА(ВложенныйЗапрос.Сумма) КАК Сумма,
+	СУММА(ВложенныйЗапрос.КоличествоНачальныйОстаток) КАК КоличествоНачальныйОстаток,
+	СУММА(ВложенныйЗапрос.КоличествоОприходование) КАК КоличествоОприходование,
+	СУММА(ВложенныйЗапрос.КоличествоПеремещение) КАК КоличествоПеремещение,
+	СУММА(ВложенныйЗапрос.КоличествоПродажи) КАК КоличествоПродажи,
+	СУММА(ВложенныйЗапрос.КоличествоСписание) КАК КоличествоСписание,
+	СУММА(ВложенныйЗапрос.КоличествоПрочее) КАК КоличествоПрочее,
+	СУММА(ВложенныйЗапрос.КоличествоКонечныйОстаток) КАК КоличествоКонечныйОстаток,
+	СУММА(ВложенныйЗапрос.КоличествоИнв) КАК КоличествоИнв
+ПОМЕСТИТЬ ТаблицаДанных
+ИЗ
+	(ВЫБРАТЬ
+		ДанныеПоЗавесам.Склад КАК Склад,
+		ДанныеПоЗавесам.Номенклатура КАК Номенклатура,
+		ДанныеПоЗавесам.Количество КАК Количество,
+		ДанныеПоЗавесам.Сумма КАК Сумма,
+		0 КАК КоличествоНачальныйОстаток,
+		0 КАК КоличествоОприходование,
+		0 КАК КоличествоПеремещение,
+		0 КАК КоличествоПродажи,
+		0 КАК КоличествоСписание,
+		0 КАК КоличествоПрочее,
+		0 КАК КоличествоКонечныйОстаток,
+		0 КАК КоличествоИнв
+	ИЗ
+		ДанныеПоЗавесам КАК ДанныеПоЗавесам
+	
+	ОБЪЕДИНИТЬ ВСЕ
+	
+	ВЫБРАТЬ
+		ДанныеПоРегистрам.Склад,
+		ДанныеПоРегистрам.Номенклатура,
+		0,
+		0,
+		ДанныеПоРегистрам.КоличествоНачальныйОстаток,
+		ДанныеПоРегистрам.КоличествоОприходование,
+		ДанныеПоРегистрам.КоличествоПеремещение,
+		ДанныеПоРегистрам.КоличествоПродажи,
+		ДанныеПоРегистрам.КоличествоСписание,
+		ДанныеПоРегистрам.КоличествоПрочее,
+		ДанныеПоРегистрам.КоличествоКонечныйОстаток,
+		ДанныеПоРегистрам.КоличествоИнв
+	ИЗ
+		ДанныеПоРегистрам КАК ДанныеПоРегистрам) КАК ВложенныйЗапрос
+
+СГРУППИРОВАТЬ ПО
+	ВложенныйЗапрос.Номенклатура,
+	ВложенныйЗапрос.Склад
+;
+
+////////////////////////////////////////////////////////////////////////////////
+ВЫБРАТЬ РАЗРЕШЕННЫЕ
+	&amp;Период КАК Период,
+	&amp;ДатаИнв КАК ДатаИнв,
+	&amp;Склад КАК Склад,
+	&amp;Подразделение КАК Подразделение,
+	&amp;ТипЦенСклада КАК ТипЦенСклада,
+	&amp;НормаПрироста КАК НормаПрироста,
+	ЕСТЬNULL(ТаблицаДанных.КоличествоНачальныйОстаток, 0) КАК КоличествоНачальныйОстаток,
+	ЕСТЬNULL(ТаблицаДанных.Количество, 0) КАК КоличествоЗавес,
+	ТаблицаДанных.КоличествоОприходование КАК КоличествоОприходование,
+	ТаблицаДанных.КоличествоПеремещение КАК КоличествоПеремещение,
+	ТаблицаДанных.КоличествоПродажи КАК КоличествоПродажи,
+	ТаблицаДанных.КоличествоСписание КАК КоличествоСписание,
+	ТаблицаДанных.КоличествоПрочее КАК КоличествоПрочее,
+	ТаблицаДанных.КоличествоКонечныйОстаток КАК КоличествоКонечныйОстаток,
+	ЦеныСклада.Цена КАК Цена,
+	ЕСТЬNULL(ЦеныНормыСлива.Цена, 78) КАК ЦенаНорма,
+	ТаблицаДанных.КоличествоИнв КАК КоличествоИнв,
+	ВЫБОР
+		КОГДА ДанныеПоЗавесамОбщ.Склад ЕСТЬ NULL 
+			ТОГДА ЛОЖЬ
+		ИНАЧЕ ИСТИНА
+	КОНЕЦ КАК ЕстьЗавес,
+	ТаблицаДанных.Номенклатура КАК Номенклатура,
+	ПродажиОбороты.КоличествоОборот КАК ПродажиОборот
+{ВЫБРАТЬ
+	Период,
+	Склад,
+	КоличествоНачальныйОстаток,
+	КоличествоКонечныйОстаток,
+	КоличествоЗавес,
+	КоличествоОприходование,
+	КоличествоПеремещение,
+	КоличествоПродажи,
+	КоличествоСписание,
+	КоличествоПрочее,
+	Цена,
+	ЦенаНорма,
+	ДатаИнв,
+	КоличествоИнв,
+	ЕстьЗавес,
+	ТипЦенСклада,
+	Номенклатура.*,
+	НормаПрироста,
+	ПродажиОборот,
+	Подразделение}
+ИЗ
+	ТаблицаДанных КАК ТаблицаДанных
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.ЦеныНоменклатуры.СрезПоследних(&amp;Период, ТипЦен = &amp;ТипЦенСклада {(Номенклатура).*}) КАК ЦеныСклада
+		ПО ТаблицаДанных.Номенклатура = ЦеныСклада.Номенклатура
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрСведений.ЦеныНоменклатуры.СрезПоследних(&amp;Период, ТипЦен = &amp;ТипЦенНормаСлива) КАК ЦеныНормыСлива
+		ПО ТаблицаДанных.Номенклатура = ЦеныНормыСлива.Номенклатура
+		ЛЕВОЕ СОЕДИНЕНИЕ (ВЫБРАТЬ РАЗЛИЧНЫЕ
+			НАЧАЛОПЕРИОДА(&amp;Период, ДЕНЬ) КАК Период,
+			ИнвентаризацияТоваровНаСкладе.Склад КАК Склад
+		ИЗ
+			Документ.ИнвентаризацияТоваровНаСкладе.Товары КАК ИнвентаризацияТоваровНаСкладеТовары
+				ЛЕВОЕ СОЕДИНЕНИЕ Документ.ИнвентаризацияТоваровНаСкладе КАК ИнвентаризацияТоваровНаСкладе
+				ПО ИнвентаризацияТоваровНаСкладеТовары.Ссылка = ИнвентаризацияТоваровНаСкладе.Ссылка
+		ГДЕ
+			ИнвентаризацияТоваровНаСкладе.Дата МЕЖДУ НАЧАЛОПЕРИОДА(&amp;Период, ДЕНЬ) И КОНЕЦПЕРИОДА(&amp;Период, ДЕНЬ)
+			И НЕ ИнвентаризацияТоваровНаСкладе.ПометкаУдаления
+			И ИнвентаризацияТоваровНаСкладе.Склад = &amp;Склад
+			И ИнвентаризацияТоваровНаСкладеТовары.Номенклатура.КлассВыгрузки = &amp;КлассВыгрузки) КАК ДанныеПоЗавесамОбщ
+		ПО ТаблицаДанных.Склад = ДанныеПоЗавесамОбщ.Склад
+		ЛЕВОЕ СОЕДИНЕНИЕ РегистрНакопления.Продажи.Обороты(&amp;ДатаИнв, КОНЕЦПЕРИОДА(&amp;Период, ДЕНЬ), , Подразделение = &amp;Подразделение {(Номенклатура).*}) КАК ПродажиОбороты
+		ПО ТаблицаДанных.Номенклатура = ПродажиОбороты.Номенклатура
+{ГДЕ
+	ТаблицаДанных.Номенклатура.*}</query>
+			<autoFillFields>false</autoFillFields>
+		</dataSet>
+		<dataSetLink>
+			<sourceDataSet>ТаблицаДат</sourceDataSet>
+			<destinationDataSet>ТаблицаТовары</destinationDataSet>
+			<sourceExpression>Период</sourceExpression>
+			<destinationExpression>Период</destinationExpression>
+			<parameter>Период</parameter>
+			<parameterListAllowed>false</parameterListAllowed>
+		</dataSetLink>
+		<dataSetLink>
+			<sourceDataSet>ТаблицаДат</sourceDataSet>
+			<destinationDataSet>ТаблицаТовары</destinationDataSet>
+			<sourceExpression>ДатаИнв</sourceExpression>
+			<destinationExpression>ДатаИнв</destinationExpression>
+			<parameter>ДатаИнв</parameter>
+			<parameterListAllowed>false</parameterListAllowed>
+		</dataSetLink>
+		<dataSetLink>
+			<sourceDataSet>ТаблицаДат</sourceDataSet>
+			<destinationDataSet>ТаблицаТовары</destinationDataSet>
+			<sourceExpression>Склад</sourceExpression>
+			<destinationExpression>Склад</destinationExpression>
+			<parameter>Склад</parameter>
+			<parameterListAllowed>false</parameterListAllowed>
+		</dataSetLink>
+		<dataSetLink>
+			<sourceDataSet>ТаблицаДат</sourceDataSet>
+			<destinationDataSet>ТаблицаТовары</destinationDataSet>
+			<sourceExpression>ТипЦенСклада</sourceExpression>
+			<destinationExpression>ТипЦенСклада</destinationExpression>
+			<parameter>ТипЦенСклада</parameter>
+			<parameterListAllowed>false</parameterListAllowed>
+		</dataSetLink>
+		<dataSetLink>
+			<sourceDataSet>ТаблицаДат</sourceDataSet>
+			<destinationDataSet>ТаблицаТовары</destinationDataSet>
+			<sourceExpression>НормаПрироста</sourceExpression>
+			<destinationExpression>НормаПрироста</destinationExpression>
+			<parameter>НормаПрироста</parameter>
+			<parameterListAllowed>false</parameterListAllowed>
+		</dataSetLink>
+		<dataSetLink>
+			<sourceDataSet>ТаблицаДат</sourceDataSet>
+			<destinationDataSet>ТаблицаТовары</destinationDataSet>
+			<sourceExpression>Подразделение</sourceExpression>
+			<destinationExpression>Подразделение</destinationExpression>
+			<parameter>Подразделение</parameter>
+			<parameterListAllowed>false</parameterListAllowed>
+		</dataSetLink>
+		<calculatedField>
+			<dataPath>Отклонение</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес ТОГДА ЕстьNull(КоличествоЗавес,0)-ЕстьNull(КоличествоКонечныйОстаток,0) ИНАЧЕ 0 КОНЕЦ</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Отклонение</d4p1:content>
+				</d4p1:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=3</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>НормаСлива</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес И &amp;КлассВыгрузки=Значение(Перечисление.КлассВыгрузкиВИнвентаризацию.Пиво)  ТОГДА (КоличествоИнв)/100 ИНАЧЕ 0 КОНЕЦ</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Норма слива</d4p1:content>
+				</d4p1:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=3</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>ОтклонениеРуб</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес ТОГДА ЕстьNull(КоличествоЗавес,0)-ЕстьNull(КоличествоКонечныйОстаток,0) ИНАЧЕ 0 КОНЕЦ*Цена</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Отклонение в руб</d4p1:content>
+				</d4p1:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=2</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>НормаСливаРуб</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес И &amp;КлассВыгрузки=Значение(Перечисление.КлассВыгрузкиВИнвентаризацию.Пиво) ТОГДА ЦенаНорма*(КоличествоИнв)/100 ИНАЧЕ 0 КОНЕЦ</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Норма слива в деньгах</d4p1:content>
+				</d4p1:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=2</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>ПользовательскаяКолонка</dataPath>
+			<expression>""</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Итого</d4p1:content>
+				</d4p1:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+				<order>true</order>
+			</useRestriction>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>ИтогоПоЗавесу</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес ТОГДА ЕстьNull(КоличествоЗавес,0)-ЕстьNull(КоличествоКонечныйОстаток,0) ИНАЧЕ 0 КОНЕЦ*Цена+ВЫБОР КОГДА ЕстьЗавес И &amp;КлассВыгрузки=Значение(Перечисление.КлассВыгрузкиВИнвентаризацию.Пиво) ТОГДА ЦенаНорма*(КоличествоИнв)/100 ИНАЧЕ 0 КОНЕЦ</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Итого по завесу</d4p1:content>
+				</d4p1:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=2; ЧН=</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>Недоплюс</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес ТОГДА ЕстьNull(КоличествоЗавес,0)-ЕстьNull(КоличествоКонечныйОстаток,0)-ЕстьNull(КоличествоИнв,0)*НормаПрироста ИНАЧЕ 0 КОНЕЦ</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Недоплюс</d4p1:content>
+				</d4p1:item>
+			</title>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>ПродажиРуб</dataPath>
+			<expression>КоличествоПродажи*Цена</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Продажи руб</d4p1:content>
+				</d4p1:item>
+			</title>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=0</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>НедоплюсРуб</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес ТОГДА ЕстьNull(КоличествоЗавес,0)-ЕстьNull(КоличествоКонечныйОстаток,0)-ЕстьNull(КоличествоИнв,0)*НормаПрироста ИНАЧЕ 0 КОНЕЦ*Цена</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Недоплюс руб</d4p1:content>
+				</d4p1:item>
+			</title>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=0</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<calculatedField>
+			<dataPath>ПроцентПрироста</dataPath>
+			<expression>ВЫБОР КОГДА ЕстьЗавес Тогда ПродажиОборот Иначе 0 Конец</expression>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Процент прироста</d4p1:content>
+				</d4p1:item>
+			</title>
+			<appearance>
+				<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
+					<parameter>Формат</parameter>
+					<value xsi:type="xs:string">ЧДЦ=2; ЧН=; ЧГ=</value>
+				</item>
+			</appearance>
+		</calculatedField>
+		<totalField>
+			<dataPath>КоличествоНачальныйОстаток</dataPath>
+			<expression>Сумма(КоличествоНачальныйОстаток)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоОприходование</dataPath>
+			<expression>Сумма(КоличествоОприходование)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>НормаСлива</dataPath>
+			<expression>Сумма(НормаСлива)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>НормаСливаРуб</dataPath>
+			<expression>Сумма(НормаСливаРуб)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>Цена</dataPath>
+			<expression>Сумма(Цена)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоПрочее</dataPath>
+			<expression>Сумма(КоличествоПрочее)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоСписание</dataPath>
+			<expression>Сумма(КоличествоСписание)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоИнв</dataPath>
+			<expression>Сумма(КоличествоИнв)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоКонечныйОстаток</dataPath>
+			<expression>Сумма(КоличествоКонечныйОстаток)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоЗавес</dataPath>
+			<expression>Сумма(КоличествоЗавес)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоПродажи</dataPath>
+			<expression>Сумма(КоличествоПродажи)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>КоличествоПеремещение</dataPath>
+			<expression>Сумма(КоличествоПеремещение)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>Отклонение</dataPath>
+			<expression>Сумма(Отклонение)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>ОтклонениеРуб</dataPath>
+			<expression>Сумма(ОтклонениеРуб)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>ИтогоПоЗавесу</dataPath>
+			<expression>Сумма(ИтогоПоЗавесу)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>Недоплюс</dataPath>
+			<expression>Сумма(Недоплюс)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>ПродажиРуб</dataPath>
+			<expression>Сумма(ПродажиРуб)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>НедоплюсРуб</dataPath>
+			<expression>Сумма(НедоплюсРуб)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>ПроцентПрироста</dataPath>
+			<expression>ВЫБОР КОГДА Сумма(ПроцентПрироста)=0 ТОГДА 0 ИНАЧЕ Сумма(Отклонение)/Сумма(ПроцентПрироста) КОНЕЦ*100)</expression>
+		</totalField>
+		<totalField>
+			<dataPath>ПродажиОборот</dataPath>
+			<expression>Сумма(ПродажиОборот)</expression>
+		</totalField>
+		<parameter>
+			<name>НачалоПериода</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Начало периода</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
+				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<DateFractions>Date</DateFractions>
+				</DateQualifiers>
+			</valueType>
+			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+			<useRestriction>true</useRestriction>
+			<expression>&amp;Период.ДатаНачала</expression>
+		</parameter>
+		<parameter>
+			<name>КонецПериода</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Конец периода</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
+				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<DateFractions>Date</DateFractions>
+				</DateQualifiers>
+			</valueType>
+			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+			<useRestriction>true</useRestriction>
+			<expression>ВЫБОР КОГДА &amp;Период.ДатаОкончания = ДАТАВРЕМЯ(1,1,1) ТОГДА ДАТАВРЕМЯ(3999,1,1) ИНАЧЕ КонецПериода(&amp;Период.ДатаОкончания,"ДЕНЬ") КОНЕЦ</expression>
+		</parameter>
+		<parameter>
+			<name>Период</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Период</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">StandardPeriod</Type>
+			</valueType>
+			<value xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:StandardPeriod">
+				<d4p1:variant xsi:type="d4p1:StandardPeriodVariant">ThisMonth</d4p1:variant>
+			</value>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>Склад</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Склад</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.Склады</Type>
+			</valueType>
+			<value xsi:nil="true"/>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>ТипЦенСклада</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Тип цен склада</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.ТипыЦенНоменклатуры</Type>
+			</valueType>
+			<value xsi:nil="true"/>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>ТипЦенНормаСлива</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Тип цен норма слива</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.ТипыЦенНоменклатуры</Type>
+			</valueType>
+			<value xsi:nil="true"/>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>Инвентаризатор</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Инвентаризатор</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.Пользователи</Type>
+			</valueType>
+			<value xsi:nil="true"/>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>ДатаИнв</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Дата инв</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
+				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
+					<DateFractions>DateTime</DateFractions>
+				</DateQualifiers>
+			</valueType>
+			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>КлассВыгрузки</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Класс выгрузки</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:EnumRef.КлассВыгрузкиВИнвентаризацию</Type>
+			</valueType>
+			<value xsi:nil="true"/>
+			<useRestriction>false</useRestriction>
+		</parameter>
+		<parameter>
+			<name>НормаПрироста</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Норма прироста</d4p1:content>
+				</d4p1:item>
+			</title>
+			<value xsi:nil="true"/>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>СвойствоНормаПрироста</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Свойство норма прироста</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:ChartOfCharacteristicTypesRef.СвойстваОбъектов</Type>
+			</valueType>
+			<value xsi:nil="true"/>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<parameter>
+			<name>Подразделение</name>
+			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
+				<d4p1:item>
+					<d4p1:lang>ru</d4p1:lang>
+					<d4p1:content>Подразделение</d4p1:content>
+				</d4p1:item>
+			</title>
+			<valueType>
+				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.Подразделения</Type>
+			</valueType>
+			<value xsi:nil="true"/>
+			<useRestriction>true</useRestriction>
+		</parameter>
+		<settingsVariant>
+			<name xmlns="http://v8.1c.ru/8.1/data-composition-system/settings">Основной</name>
+			<presentation xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="xs:string">Основной</presentation>
+		</settingsVariant>
+	</dataCompositionSchema>
+</SchemaFile>﻿<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<selection>
+		<item xsi:type="SelectedItemField">
+			<field>Склад</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>Период</field>
+		</item>
+		<item xsi:type="SelectedItemField">
+			<field>Номенклатура</field>
+		</item>
+		<item xsi:type="SelectedItemFolder">
+			<title>Количество</title>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоНачальныйОстаток</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоОприходование</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоСписание</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоПеремещение</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоПродажи</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>ПродажиРуб</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоПрочее</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоКонечныйОстаток</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>КоличествоЗавес</field>
+				<lwsTitle>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Завес</v8:content>
+					</v8:item>
+				</lwsTitle>
+			</item>
+			<placement>Horizontally</placement>
+		</item>
+		<item xsi:type="SelectedItemFolder">
+			<lwsTitle>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Расчет</v8:content>
+				</v8:item>
+			</lwsTitle>
+			<item xsi:type="SelectedItemField">
+				<field>Отклонение</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>ОтклонениеРуб</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>НормаСлива</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>НормаСливаРуб</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>Недоплюс</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>НедоплюсРуб</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>ПроцентПрироста</field>
+			</item>
+			<item xsi:type="SelectedItemField">
+				<field>ПродажиОборот</field>
+			</item>
+			<placement>Horizontally</placement>
+		</item>
+	</selection>
+	<filter>
+		<item xsi:type="FilterItemComparison">
+			<use>false</use>
+			<left xsi:type="dcscor:Field">Склад</left>
+			<comparisonType>Equal</comparisonType>
+			<viewMode>Normal</viewMode>
+		</item>
+		<item xsi:type="FilterItemComparison">
+			<use>false</use>
+			<left xsi:type="dcscor:Field">Номенклатура</left>
+			<comparisonType>Equal</comparisonType>
+			<viewMode>Normal</viewMode>
+		</item>
+	</filter>
+	<order>
+		<item xsi:type="OrderItemField">
+			<field>Склад</field>
+			<orderType>Asc</orderType>
+		</item>
+		<item xsi:type="OrderItemField">
+			<field>Номенклатура</field>
+			<orderType>Asc</orderType>
+		</item>
+		<item xsi:type="OrderItemField">
+			<field>Период</field>
+			<orderType>Asc</orderType>
+		</item>
+	</order>
+	<conditionalAppearance>
+		<item>
+			<selection>
+				<item>
+					<field>Отклонение</field>
+				</item>
+			</selection>
+			<filter>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">Отклонение</left>
+					<comparisonType>Less</comparisonType>
+					<right xsi:type="xs:decimal">0</right>
+					<presentation xsi:type="xs:string">Завес больше реального остатка</presentation>
+				</item>
+			</filter>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>ЦветФона</dcscor:parameter>
+					<dcscor:value xsi:type="v8ui:Color">#FF6600</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
+		<item>
+			<selection>
+				<item>
+					<field>Отклонение</field>
+				</item>
+			</selection>
+			<filter>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">Отклонение</left>
+					<comparisonType>Greater</comparisonType>
+					<right xsi:type="xs:decimal">0</right>
+					<presentation xsi:type="xs:string">Завес меньше реального остатка</presentation>
+				</item>
+			</filter>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>ЦветФона</dcscor:parameter>
+					<dcscor:value xsi:type="v8ui:Color">#FFFF00</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
+		<item>
+			<selection>
+				<item>
+					<field>ПользовательскаяКолонка</field>
+				</item>
+			</selection>
+			<filter/>
+			<appearance>
+				<dcscor:item xsi:type="SettingsParameterValue">
+					<dcscor:parameter>Текст</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>ИТОГО</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</item>
+	</conditionalAppearance>
+	<outputParameters>
+		<dcscor:item xsi:type="SettingsParameterValue">
+			<dcscor:parameter>ГоризонтальноеРасположениеОбщихИтогов</dcscor:parameter>
+			<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">None</dcscor:value>
+		</dcscor:item>
+	</outputParameters>
+	<item xsi:type="StructureItemTable">
+		<column>
+			<groupItems>
+				<item xsi:type="GroupItemField">
+					<field>Период</field>
+					<groupType>Items</groupType>
+					<periodAdditionType>None</periodAdditionType>
+					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+				</item>
+			</groupItems>
+			<order>
+				<item xsi:type="OrderItemAuto"/>
+			</order>
+			<selection>
+				<item xsi:type="SelectedItemAuto"/>
+			</selection>
+		</column>
+		<column>
+			<groupItems>
+				<item xsi:type="GroupItemField">
+					<field>ПользовательскаяКолонка</field>
+					<groupType>Items</groupType>
+					<periodAdditionType>None</periodAdditionType>
+					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+				</item>
+			</groupItems>
+			<order>
+				<item xsi:type="OrderItemAuto"/>
+			</order>
+			<selection>
+				<item xsi:type="SelectedItemAuto">
+					<use>false</use>
+				</item>
+				<item xsi:type="SelectedItemFolder">
+					<item xsi:type="SelectedItemField">
+						<field>ИтогоПоЗавесу</field>
+					</item>
+					<placement>Auto</placement>
+				</item>
+			</selection>
+		</column>
+		<row>
+			<groupItems>
+				<item xsi:type="GroupItemField">
+					<field>Склад</field>
+					<groupType>Items</groupType>
+					<periodAdditionType>None</periodAdditionType>
+					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+				</item>
+			</groupItems>
+			<order>
+				<item xsi:type="OrderItemAuto"/>
+			</order>
+			<selection>
+				<item xsi:type="SelectedItemAuto"/>
+			</selection>
+			<item>
+				<groupItems>
+					<item xsi:type="GroupItemField">
+						<field>Номенклатура</field>
+						<groupType>Items</groupType>
+						<periodAdditionType>None</periodAdditionType>
+						<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
+						<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
+					</item>
+				</groupItems>
+				<order>
+					<item xsi:type="OrderItemAuto"/>
+				</order>
+				<selection>
+					<item xsi:type="SelectedItemAuto"/>
+				</selection>
+			</item>
+		</row>
+		<selection>
+			<item xsi:type="SelectedItemAuto"/>
+		</selection>
+	</item>
+</Settings>﻿<?xml version="1.0" encoding="UTF-8"?>
+<SchemaFile xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema"/>
+</SchemaFile>
