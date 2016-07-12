@@ -52,54 +52,6 @@
 				<field>Регистратор</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>КоличествоЗакупки</dataPath>
-				<field>КоличествоЗакупки</field>
-				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
-					<d5p1:item>
-						<d5p1:lang>ru</d5p1:lang>
-						<d5p1:content>Закупки</d5p1:content>
-					</d5p1:item>
-				</title>
-				<valueType>
-					<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:decimal</Type>
-					<NumberQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
-						<Digits>0</Digits>
-						<FractionDigits>0</FractionDigits>
-						<AllowedSign>Any</AllowedSign>
-					</NumberQualifiers>
-				</valueType>
-				<appearance>
-					<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
-						<parameter>Формат</parameter>
-						<value xsi:type="xs:string">ЧДЦ=3</value>
-					</item>
-				</appearance>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>КоличествоПродажи</dataPath>
-				<field>КоличествоПродажи</field>
-				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
-					<d5p1:item>
-						<d5p1:lang>ru</d5p1:lang>
-						<d5p1:content>Продажи</d5p1:content>
-					</d5p1:item>
-				</title>
-				<valueType>
-					<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:decimal</Type>
-					<NumberQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
-						<Digits>0</Digits>
-						<FractionDigits>0</FractionDigits>
-						<AllowedSign>Any</AllowedSign>
-					</NumberQualifiers>
-				</valueType>
-				<appearance>
-					<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
-						<parameter>Формат</parameter>
-						<value xsi:type="xs:string">ЧДЦ=3</value>
-					</item>
-				</appearance>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>КоличествоНачальныйОстатокБУ</dataPath>
 				<field>КоличествоНачальныйОстатокБУ</field>
 			</field>
@@ -116,32 +68,8 @@
 				<field>КоличествоНачальныйОстатокУУВПути</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>Цена</dataPath>
-				<field>Цена</field>
-				<appearance>
-					<item xmlns="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xsi:type="dcsset:SettingsParameterValue">
-						<parameter>Формат</parameter>
-						<value xsi:type="xs:string">ЧДЦ=2</value>
-					</item>
-				</appearance>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>КоличествоВвод</dataPath>
-				<field>КоличествоВвод</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>КоличествоКПередаче</dataPath>
 				<field>КоличествоКПередаче</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>КоличествоПродажиНаИП</dataPath>
-				<field>КоличествоПродажиНаИП</field>
-				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
-					<d5p1:item>
-						<d5p1:lang>ru</d5p1:lang>
-						<d5p1:content>Количество продажи на ИП</d5p1:content>
-					</d5p1:item>
-				</title>
 			</field>
 			<item xsi:type="DataSetQuery">
 				<name>НачОстатокБУ</name>
@@ -227,200 +155,6 @@
 			ДокументПередачи.ОтражатьВБухгалтерскомУчете
 				И (Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Продажа)
 					ИЛИ Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Закуп)) {(Номенклатура).*}) КАК ТоварыКПередачеОрганизацийОстатки</query>
-				<autoFillFields>false</autoFillFields>
-			</item>
-			<item xsi:type="DataSetQuery">
-				<name>Закупки</name>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Номенклатура</dataPath>
-					<field>Номенклатура</field>
-					<role>
-						<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
-					</role>
-					<valueType>
-						<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d7p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d7p1:CatalogRef.Номенклатура</Type>
-					</valueType>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Группировка</dataPath>
-					<field>Группировка</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Период</dataPath>
-					<field>Период</field>
-					<role>
-						<periodNumber xmlns="http://v8.1c.ru/8.1/data-composition-system/common">2</periodNumber>
-						<periodType xmlns="http://v8.1c.ru/8.1/data-composition-system/common">Main</periodType>
-					</role>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Регистратор</dataPath>
-					<field>Регистратор</field>
-					<role>
-						<periodNumber xmlns="http://v8.1c.ru/8.1/data-composition-system/common">1</periodNumber>
-						<periodType xmlns="http://v8.1c.ru/8.1/data-composition-system/common">Main</periodType>
-					</role>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>КоличествоЗакупки</dataPath>
-					<field>КоличествоЗакупки</field>
-				</field>
-				<dataSource>ИсточникДанных1</dataSource>
-				<query>ВЫБРАТЬ РАЗРЕШЕННЫЕ
-	ЗакупкиОбороты.Номенклатура КАК Номенклатура,
-	ЗакупкиОбороты.КоличествоОборот КАК КоличествоЗакупки,
-	НАЧАЛОПЕРИОДА(ЗакупкиОбороты.Период, МЕСЯЦ) КАК Период,
-	ЗакупкиОбороты.Регистратор КАК Регистратор,
-	"Обороты" КАК Группировка
-{ВЫБРАТЬ
-	Номенклатура.*,
-	КоличествоЗакупки,
-	Период,
-	Регистратор.*,
-	Группировка}
-ИЗ
-	РегистрНакопления.Закупки.Обороты(
-			&amp;НачальнаяДата,
-			КОНЕЦПЕРИОДА(&amp;ДатаОтчета, ДЕНЬ),
-			Регистратор,
-			Организация.ТипОрганизации = ЗНАЧЕНИЕ(Перечисление.ВидыНазначенияОрганизации.Закуп)
-				И ДокументЗакупки.ОтражатьВБухгалтерскомУчете {(Номенклатура).*}) КАК ЗакупкиОбороты
-{ГДЕ
-	(2) КАК Группировка}
-
-ОБЪЕДИНИТЬ ВСЕ
-
-ВЫБРАТЬ
-	ТоварыОрганизацийБУОстатки.Номенклатура,
-	ТоварыОрганизацийБУОстатки.КоличествоПриход,
-	НАЧАЛОПЕРИОДА(ТоварыОрганизацийБУОстатки.Период, МЕСЯЦ),
-	ТоварыОрганизацийБУОстатки.Регистратор,
-	"Обороты"
-ИЗ
-	РегистрНакопления.ТоварыОрганизацийБУ.Обороты(
-			&amp;НачальнаяДата,
-			КОНЕЦПЕРИОДА(&amp;ДатаОтчета, ДЕНЬ),
-			Регистратор,
-			(Квартал = &amp;КварталОтчета
-				ИЛИ Квартал = ДОБАВИТЬКДАТЕ(&amp;КварталОтчета, КВАРТАЛ, 1))
-				И (Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Продажа)
-					ИЛИ Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Закуп)) {(Номенклатура).*}) КАК ТоварыОрганизацийБУОстатки
-ГДЕ
-	НЕ ТоварыОрганизацийБУОстатки.Регистратор.ОтражатьВУправленческомУчете</query>
-				<autoFillFields>false</autoFillFields>
-			</item>
-			<item xsi:type="DataSetQuery">
-				<name>Продажи</name>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Группировка</dataPath>
-					<field>Группировка</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Номенклатура</dataPath>
-					<field>Номенклатура</field>
-					<role>
-						<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
-					</role>
-					<valueType>
-						<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d7p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d7p1:CatalogRef.Номенклатура</Type>
-					</valueType>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Период</dataPath>
-					<field>Период</field>
-					<role>
-						<periodNumber xmlns="http://v8.1c.ru/8.1/data-composition-system/common">2</periodNumber>
-						<periodType xmlns="http://v8.1c.ru/8.1/data-composition-system/common">Main</periodType>
-					</role>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Регистратор</dataPath>
-					<field>Регистратор</field>
-					<role>
-						<periodNumber xmlns="http://v8.1c.ru/8.1/data-composition-system/common">1</periodNumber>
-						<periodType xmlns="http://v8.1c.ru/8.1/data-composition-system/common">Main</periodType>
-					</role>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>КоличествоПродажи</dataPath>
-					<field>КоличествоПродажи</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>КоличествоПродажиНаИП</dataPath>
-					<field>КоличествоПродажиНаИП</field>
-					<title xmlns:d6p1="http://v8.1c.ru/8.1/data/core" xsi:type="d6p1:LocalStringType">
-						<d6p1:item>
-							<d6p1:lang>ru</d6p1:lang>
-							<d6p1:content>Количество продажи на ИП</d6p1:content>
-						</d6p1:item>
-					</title>
-				</field>
-				<dataSource>ИсточникДанных1</dataSource>
-				<query>ВЫБРАТЬ РАЗРЕШЕННЫЕ
-	ПродажиОбороты.Номенклатура КАК Номенклатура,
-	ПродажиОбороты.КоличествоОборот КАК КоличествоПродажи,
-	НАЧАЛОПЕРИОДА(ПродажиОбороты.Период, МЕСЯЦ) КАК Период,
-	ПродажиОбороты.Регистратор КАК Регистратор,
-	"Обороты" КАК Группировка,
-	0 КАК КоличествоПродажиНаИП
-{ВЫБРАТЬ
-	Номенклатура.*,
-	КоличествоПродажи,
-	Период,
-	Регистратор.*,
-	Группировка,
-	КоличествоПродажиНаИП КАК КоличествоПродажиНаИП}
-ИЗ
-	РегистрНакопления.Продажи.Обороты(
-			&amp;НачальнаяДата,
-			КОНЕЦПЕРИОДА(&amp;ДатаОтчета, ДЕНЬ),
-			Регистратор,
-			Организация.ТипОрганизации В (ЗНАЧЕНИЕ(Перечисление.ВидыНазначенияОрганизации.Продажа), ЗНАЧЕНИЕ(Перечисление.ВидыНазначенияОрганизации.Закуп))
-				И ДокументПродажи.ОтражатьВБухгалтерскомУчете {(Номенклатура).*}) КАК ПродажиОбороты
-{ГДЕ
-	(3) КАК Группировка}
-
-ОБЪЕДИНИТЬ ВСЕ
-
-ВЫБРАТЬ
-	ТоварыОрганизацийБУОстатки.Номенклатура,
-	ТоварыОрганизацийБУОстатки.КоличествоРасход,
-	НАЧАЛОПЕРИОДА(ТоварыОрганизацийБУОстатки.Период, МЕСЯЦ),
-	ТоварыОрганизацийБУОстатки.Регистратор,
-	"Обороты",
-	0
-ИЗ
-	РегистрНакопления.ТоварыОрганизацийБУ.Обороты(
-			&amp;НачальнаяДата,
-			КОНЕЦПЕРИОДА(&amp;ДатаОтчета, ДЕНЬ),
-			Регистратор,
-			(Квартал = &amp;КварталОтчета
-				ИЛИ Квартал = ДОБАВИТЬКДАТЕ(&amp;КварталОтчета, КВАРТАЛ, 1))
-				И (Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Продажа)
-					ИЛИ Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Закуп)) {(Номенклатура).*}) КАК ТоварыОрганизацийБУОстатки
-ГДЕ
-	НЕ ТоварыОрганизацийБУОстатки.Регистратор.ОтражатьВУправленческомУчете
-
-ОБЪЕДИНИТЬ ВСЕ
-
-ВЫБРАТЬ
-	ТоварыОрганизацийБУОстатки.Номенклатура,
-	0,
-	НАЧАЛОПЕРИОДА(ТоварыОрганизацийБУОстатки.Период, МЕСЯЦ),
-	ТоварыОрганизацийБУОстатки.Регистратор,
-	"Обороты",
-	ТоварыОрганизацийБУОстатки.КоличествоРасход
-ИЗ
-	РегистрНакопления.ТоварыОрганизацийБУ.Обороты(
-			&amp;НачальнаяДата,
-			КОНЕЦПЕРИОДА(&amp;ДатаОтчета, ДЕНЬ),
-			Регистратор,
-			(Квартал = &amp;КварталОтчета
-				ИЛИ Квартал = ДОБАВИТЬКДАТЕ(&amp;КварталОтчета, КВАРТАЛ, 1))
-				И (Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Продажа)
-					ИЛИ Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Закуп)) {(Номенклатура).*}) КАК ТоварыОрганизацийБУОстатки
-ГДЕ
-	ТоварыОрганизацийБУОстатки.Регистратор ССЫЛКА Документ.КорректировкаЗаписейРегистров</query>
 				<autoFillFields>false</autoFillFields>
 			</item>
 			<item xsi:type="DataSetQuery">
@@ -512,111 +246,7 @@
 	РегистрНакопления.ТоварыКПередачеСоСкладов.Остатки(КОНЕЦПЕРИОДА(&amp;ДатаОтчета, ДЕНЬ), {(Номенклатура).*}) КАК ТоварыКПередачеСоСкладовОстатки</query>
 				<autoFillFields>false</autoFillFields>
 			</item>
-			<item xsi:type="DataSetQuery">
-				<name>Цены</name>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Регистратор</dataPath>
-					<field>Регистратор</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Номенклатура</dataPath>
-					<field>Номенклатура</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Цена</dataPath>
-					<field>Цена</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Группировка</dataPath>
-					<field>Группировка</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Период</dataPath>
-					<field>Период</field>
-				</field>
-				<dataSource>ИсточникДанных1</dataSource>
-				<query>ВЫБРАТЬ РАЗРЕШЕННЫЕ
-	НАЧАЛОПЕРИОДА(ЦеныНоменклатурыСрезПоследних.Период, ДЕНЬ) КАК Период,
-	ЦеныНоменклатурыСрезПоследних.Регистратор КАК Регистратор,
-	ЦеныНоменклатурыСрезПоследних.Номенклатура КАК Номенклатура,
-	ЦеныНоменклатурыСрезПоследних.Цена КАК Цена,
-	"Цена закуп" КАК Группировка
-{ВЫБРАТЬ
-	Период,
-	Регистратор.*,
-	Номенклатура.*,
-	Цена,
-	Группировка}
-ИЗ
-	РегистрСведений.ЦеныНоменклатуры.СрезПоследних(КОНЕЦПЕРИОДА(&amp;ДатаОтчета, ДЕНЬ), ТипЦен = &amp;ТипЦенЗакуп {(Номенклатура).*}) КАК ЦеныНоменклатурыСрезПоследних</query>
-				<autoFillFields>false</autoFillFields>
-			</item>
-			<item xsi:type="DataSetQuery">
-				<name>ВводОстатковКвартал</name>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Группировка</dataPath>
-					<field>Группировка</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Номенклатура</dataPath>
-					<field>Номенклатура</field>
-					<role>
-						<dimension xmlns="http://v8.1c.ru/8.1/data-composition-system/common">true</dimension>
-					</role>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Период</dataPath>
-					<field>Период</field>
-					<role>
-						<periodNumber xmlns="http://v8.1c.ru/8.1/data-composition-system/common">2</periodNumber>
-						<periodType xmlns="http://v8.1c.ru/8.1/data-composition-system/common">Main</periodType>
-					</role>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>Регистратор</dataPath>
-					<field>Регистратор</field>
-					<role>
-						<periodNumber xmlns="http://v8.1c.ru/8.1/data-composition-system/common">1</periodNumber>
-						<periodType xmlns="http://v8.1c.ru/8.1/data-composition-system/common">Main</periodType>
-					</role>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>КоличествоВвод</dataPath>
-					<field>КоличествоВвод</field>
-				</field>
-				<dataSource>ИсточникДанных1</dataSource>
-				<query>ВЫБРАТЬ РАЗРЕШЕННЫЕ
-	ТоварыОрганизацийБУОбороты.Номенклатура КАК Номенклатура,
-	ТоварыОрганизацийБУОбороты.КоличествоОборот КАК КоличествоВвод,
-	"Обороты" КАК Группировка,
-	НАЧАЛОПЕРИОДА(ТоварыОрганизацийБУОбороты.Период, МЕСЯЦ) КАК Период,
-	ТоварыОрганизацийБУОбороты.Регистратор КАК Регистратор
-{ВЫБРАТЬ
-	Номенклатура.*,
-	КоличествоВвод,
-	Группировка,
-	Период,
-	Регистратор.*}
-ИЗ
-	РегистрНакопления.ТоварыОрганизацийБУ.Обороты(
-			ДОБАВИТЬКДАТЕ(&amp;КварталОтчета, СЕКУНДА, -2),
-			ДОБАВИТЬКДАТЕ(&amp;КварталОтчета, ДЕНЬ, 1),
-			Регистратор,
-			Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Продажа)
-				ИЛИ Организация.ТипОрганизации = ЗНАЧЕНИЕ(перечисление.ВидыНазначенияОрганизации.Закуп) {(Номенклатура).*}) КАК ТоварыОрганизацийБУОбороты
-ГДЕ
-	ТоварыОрганизацийБУОбороты.Регистратор = &amp;ВводОстатковКв</query>
-				<autoFillFields>false</autoFillFields>
-			</item>
 		</dataSet>
-		<totalField>
-			<dataPath>КоличествоЗакупки</dataPath>
-			<expression>Сумма(КоличествоЗакупки)</expression>
-		</totalField>
-		<totalField>
-			<dataPath>КоличествоПродажи</dataPath>
-			<expression>Сумма(КоличествоПродажи)</expression>
-		</totalField>
 		<totalField>
 			<dataPath>КоличествоНачальныйОстатокБУ</dataPath>
 			<expression>Сумма(КоличествоНачальныйОстатокБУ)</expression>
@@ -634,20 +264,8 @@
 			<expression>Сумма(КоличествоНачальныйОстатокУУВПути)</expression>
 		</totalField>
 		<totalField>
-			<dataPath>Цена</dataPath>
-			<expression>Среднее(Цена)</expression>
-		</totalField>
-		<totalField>
-			<dataPath>КоличествоВвод</dataPath>
-			<expression>Сумма(КоличествоВвод)</expression>
-		</totalField>
-		<totalField>
 			<dataPath>КоличествоКПередаче</dataPath>
 			<expression>Сумма(КоличествоКПередаче)</expression>
-		</totalField>
-		<totalField>
-			<dataPath>КоличествоПродажиНаИП</dataPath>
-			<expression>Сумма(КоличествоПродажиНаИП)</expression>
 		</totalField>
 		<parameter>
 			<name>ПериодАнализа</name>
@@ -720,20 +338,6 @@
 			<useRestriction>true</useRestriction>
 		</parameter>
 		<parameter>
-			<name>ТипЦенЗакуп</name>
-			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
-				<d4p1:item>
-					<d4p1:lang>ru</d4p1:lang>
-					<d4p1:content>Тип цен закуп</d4p1:content>
-				</d4p1:item>
-			</title>
-			<valueType>
-				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.ТипыЦенНоменклатуры</Type>
-			</valueType>
-			<value xsi:nil="true"/>
-			<useRestriction>true</useRestriction>
-		</parameter>
-		<parameter>
 			<name>КварталОтчета</name>
 			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
 				<d4p1:item>
@@ -748,38 +352,6 @@
 				</DateQualifiers>
 			</valueType>
 			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
-			<useRestriction>true</useRestriction>
-		</parameter>
-		<parameter>
-			<name>НачальнаяДата</name>
-			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
-				<d4p1:item>
-					<d4p1:lang>ru</d4p1:lang>
-					<d4p1:content>Начальная дата</d4p1:content>
-				</d4p1:item>
-			</title>
-			<valueType>
-				<Type xmlns="http://v8.1c.ru/8.1/data/core">xs:dateTime</Type>
-				<DateQualifiers xmlns="http://v8.1c.ru/8.1/data/core">
-					<DateFractions>DateTime</DateFractions>
-				</DateQualifiers>
-			</valueType>
-			<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
-			<useRestriction>true</useRestriction>
-			<expression>НАЧАЛОПЕРИОДА(ДОБАВИТЬКДАТЕ(&amp;ПериодАнализа,"Месяц",-3),"ДЕНЬ")</expression>
-		</parameter>
-		<parameter>
-			<name>ВводОстатковКв</name>
-			<title xmlns:d4p1="http://v8.1c.ru/8.1/data/core" xsi:type="d4p1:LocalStringType">
-				<d4p1:item>
-					<d4p1:lang>ru</d4p1:lang>
-					<d4p1:content>Ввод остатков кв</d4p1:content>
-				</d4p1:item>
-			</title>
-			<valueType>
-				<Type xmlns="http://v8.1c.ru/8.1/data/core" xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:DocumentRef.КорректировкаЗаписейРегистров</Type>
-			</valueType>
-			<value xsi:nil="true"/>
 			<useRestriction>true</useRestriction>
 		</parameter>
 		<settingsVariant>
@@ -830,14 +402,6 @@
 			<totalExpressionPresentation/>
 		</item>
 	</userFields>
-	<selection>
-		<item xsi:type="SelectedItemField">
-			<field>КоличествоЗакупки</field>
-		</item>
-		<item xsi:type="SelectedItemField">
-			<field>КоличествоПродажи</field>
-		</item>
-	</selection>
 	<filter>
 		<item xsi:type="FilterItemComparison">
 			<use>false</use>
@@ -855,7 +419,7 @@
 		</dcscor:item>
 		<dcscor:item xsi:type="SettingsParameterValue">
 			<dcscor:use>false</dcscor:use>
-			<dcscor:parameter>ВводОстатковКв</dcscor:parameter>
+			<dcscor:parameter>КварталОтчета</dcscor:parameter>
 			<dcscor:value xsi:type="v8:StandardPeriod">
 				<v8:variant xsi:type="v8:StandardPeriodVariant">Custom</v8:variant>
 				<v8:startDate>0001-01-01T00:00:00</v8:startDate>
@@ -1079,74 +643,10 @@
 				</item>
 			</selection>
 		</column>
-		<column>
-			<groupItems>
-				<item xsi:type="GroupItemField">
-					<field>ПользовательскиеПоля.Поле3</field>
-					<groupType>Items</groupType>
-					<periodAdditionType>None</periodAdditionType>
-					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
-					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
-				</item>
-			</groupItems>
-			<order>
-				<item xsi:type="OrderItemAuto"/>
-			</order>
-			<selection>
-				<item xsi:type="SelectedItemAuto">
-					<use>false</use>
-				</item>
-				<item xsi:type="SelectedItemField">
-					<field>Цена</field>
-				</item>
-			</selection>
-		</column>
-		<column>
-			<groupItems>
-				<item xsi:type="GroupItemField">
-					<field>Период</field>
-					<groupType>Items</groupType>
-					<periodAdditionType>None</periodAdditionType>
-					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
-					<periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionEnd>
-				</item>
-			</groupItems>
-			<filter>
-				<item xsi:type="FilterItemComparison">
-					<left xsi:type="dcscor:Field">Группировка</left>
-					<comparisonType>Equal</comparisonType>
-					<right xsi:type="xs:string">Обороты</right>
-				</item>
-			</filter>
-			<order>
-				<item xsi:type="OrderItemAuto"/>
-				<item xsi:type="OrderItemField">
-					<field>Период</field>
-					<orderType>Desc</orderType>
-				</item>
-			</order>
-			<selection>
-				<item xsi:type="SelectedItemAuto">
-					<use>false</use>
-				</item>
-				<item xsi:type="SelectedItemField">
-					<field>КоличествоЗакупки</field>
-				</item>
-				<item xsi:type="SelectedItemField">
-					<field>КоличествоПродажи</field>
-				</item>
-				<item xsi:type="SelectedItemField">
-					<field>КоличествоВвод</field>
-				</item>
-				<item xsi:type="SelectedItemField">
-					<field>Период</field>
-				</item>
-			</selection>
-		</column>
 		<row>
 			<groupItems>
 				<item xsi:type="GroupItemField">
-					<field>Номенклатура.Производитель</field>
+					<field>Номенклатура.Родитель</field>
 					<groupType>Items</groupType>
 					<periodAdditionType>None</periodAdditionType>
 					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
