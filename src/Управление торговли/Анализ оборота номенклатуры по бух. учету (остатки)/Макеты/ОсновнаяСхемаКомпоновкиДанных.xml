@@ -52,24 +52,42 @@
 				<field>Регистратор</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>КоличествоНачальныйОстатокБУ</dataPath>
-				<field>КоличествоНачальныйОстатокБУ</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>КоличествоНачальныйОстатокУУ</dataPath>
 				<field>КоличествоНачальныйОстатокУУ</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>КоличествоНачальныйОстатокБУВПути</dataPath>
-				<field>КоличествоНачальныйОстатокБУВПути</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>КоличествоНачальныйОстатокУУВПути</dataPath>
 				<field>КоличествоНачальныйОстатокУУВПути</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоНачальныйОстатокБУ</dataPath>
+				<field>КоличествоНачальныйОстатокБУ</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Количество начальный остаток БУ</d5p1:content>
+					</d5p1:item>
+				</title>
+			</field>
+			<field xsi:type="DataSetFieldField">
 				<dataPath>КоличествоКПередаче</dataPath>
 				<field>КоличествоКПередаче</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Количество к передаче</d5p1:content>
+					</d5p1:item>
+				</title>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>КоличествоНачальныйОстатокБУВПути</dataPath>
+				<field>КоличествоНачальныйОстатокБУВПути</field>
+				<title xmlns:d5p1="http://v8.1c.ru/8.1/data/core" xsi:type="d5p1:LocalStringType">
+					<d5p1:item>
+						<d5p1:lang>ru</d5p1:lang>
+						<d5p1:content>Количество начальный остаток БУВПути</d5p1:content>
+					</d5p1:item>
+				</title>
 			</field>
 			<item xsi:type="DataSetQuery">
 				<name>НачОстатокБУ</name>
@@ -98,14 +116,32 @@
 				<field xsi:type="DataSetFieldField">
 					<dataPath>КоличествоНачальныйОстатокБУ</dataPath>
 					<field>КоличествоНачальныйОстатокБУ</field>
-				</field>
-				<field xsi:type="DataSetFieldField">
-					<dataPath>КоличествоНачальныйОстатокБУВПути</dataPath>
-					<field>КоличествоНачальныйОстатокБУВПути</field>
+					<title xmlns:d6p1="http://v8.1c.ru/8.1/data/core" xsi:type="d6p1:LocalStringType">
+						<d6p1:item>
+							<d6p1:lang>ru</d6p1:lang>
+							<d6p1:content>Количество начальный остаток БУ</d6p1:content>
+						</d6p1:item>
+					</title>
 				</field>
 				<field xsi:type="DataSetFieldField">
 					<dataPath>КоличествоКПередаче</dataPath>
 					<field>КоличествоКПередаче</field>
+					<title xmlns:d6p1="http://v8.1c.ru/8.1/data/core" xsi:type="d6p1:LocalStringType">
+						<d6p1:item>
+							<d6p1:lang>ru</d6p1:lang>
+							<d6p1:content>Количество к передаче</d6p1:content>
+						</d6p1:item>
+					</title>
+				</field>
+				<field xsi:type="DataSetFieldField">
+					<dataPath>КоличествоНачальныйОстатокБУВПути</dataPath>
+					<field>КоличествоНачальныйОстатокБУВПути</field>
+					<title xmlns:d6p1="http://v8.1c.ru/8.1/data/core" xsi:type="d6p1:LocalStringType">
+						<d6p1:item>
+							<d6p1:lang>ru</d6p1:lang>
+							<d6p1:content>Количество начальный остаток БУВПути</d6p1:content>
+						</d6p1:item>
+					</title>
 				</field>
 				<dataSource>ИсточникДанных1</dataSource>
 				<query>ВЫБРАТЬ РАЗРЕШЕННЫЕ
@@ -248,24 +284,24 @@
 			</item>
 		</dataSet>
 		<totalField>
-			<dataPath>КоличествоНачальныйОстатокБУ</dataPath>
-			<expression>Сумма(КоличествоНачальныйОстатокБУ)</expression>
+			<dataPath>КоличествоКПередаче</dataPath>
+			<expression>Сумма(КоличествоКПередаче)</expression>
 		</totalField>
 		<totalField>
-			<dataPath>КоличествоНачальныйОстатокУУ</dataPath>
-			<expression>Сумма(КоличествоНачальныйОстатокУУ)</expression>
+			<dataPath>КоличествоНачальныйОстатокБУ</dataPath>
+			<expression>Сумма(КоличествоНачальныйОстатокБУ)</expression>
 		</totalField>
 		<totalField>
 			<dataPath>КоличествоНачальныйОстатокБУВПути</dataPath>
 			<expression>Сумма(КоличествоНачальныйОстатокБУВПути)</expression>
 		</totalField>
 		<totalField>
-			<dataPath>КоличествоНачальныйОстатокУУВПути</dataPath>
-			<expression>Сумма(КоличествоНачальныйОстатокУУВПути)</expression>
+			<dataPath>КоличествоНачальныйОстатокУУ</dataPath>
+			<expression>Сумма(КоличествоНачальныйОстатокУУ)</expression>
 		</totalField>
 		<totalField>
-			<dataPath>КоличествоКПередаче</dataPath>
-			<expression>Сумма(КоличествоКПередаче)</expression>
+			<dataPath>КоличествоНачальныйОстатокУУВПути</dataPath>
+			<expression>Сумма(КоличествоНачальныйОстатокУУВПути)</expression>
 		</totalField>
 		<parameter>
 			<name>ПериодАнализа</name>
@@ -419,7 +455,7 @@
 		</dcscor:item>
 		<dcscor:item xsi:type="SettingsParameterValue">
 			<dcscor:use>false</dcscor:use>
-			<dcscor:parameter>КварталОтчета</dcscor:parameter>
+			<dcscor:parameter>СкладВПути</dcscor:parameter>
 			<dcscor:value xsi:type="v8:StandardPeriod">
 				<v8:variant xsi:type="v8:StandardPeriodVariant">Custom</v8:variant>
 				<v8:startDate>0001-01-01T00:00:00</v8:startDate>
@@ -646,7 +682,7 @@
 		<row>
 			<groupItems>
 				<item xsi:type="GroupItemField">
-					<field>Номенклатура.Родитель</field>
+					<field>Номенклатура.Производитель</field>
 					<groupType>Items</groupType>
 					<periodAdditionType>None</periodAdditionType>
 					<periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</periodAdditionBegin>
